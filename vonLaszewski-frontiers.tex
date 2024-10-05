@@ -43,6 +43,60 @@
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{makecell}
+
+
+\usepackage{tikz}
+\usetikzlibrary{mindmap,trees}
+
+\usepackage{forest}
+\usepackage{hyperref}
+\usepackage{adjustbox}
+
+\usetikzlibrary{arrows.meta,shadows}
+
+\newcommand{\ngreen}{bottom color=green!20}
+\newcommand{\ngrey}{bottom color=gray!20}
+\newcommand{\nred}{bottom color=red!20}
+\newcommand{\nwhite}{bottom color=white!20}
+\newcommand{\TODO}[1]{\todo[inline]{#1}}
+\newcommand{\GVL}[1]{{\begin{blue} #1}}
+
+
+\forestset{
+  skan tree/.style={
+    for tree={
+      drop shadow,
+      text width=3cm,
+      grow'=0,
+      rounded corners,
+      draw,
+      top color=white,
+      bottom color=blue!20,
+      edge={Latex-},
+      child anchor=parent,
+      %parent anchor=children,
+      anchor=parent,
+      tier/.wrap pgfmath arg={tier ##1}{level()},
+      s sep+=2.5pt,
+      l sep+=2.5pt,
+      edge path'={
+        (.child anchor) -- ++(-10pt,0) -- (!u.parent anchor)
+      },
+      node options={ align=center },
+    },
+    before typesetting nodes={
+      for tree={
+        content/.wrap value={\strut ##1},
+      },
+    },
+  },
+}
+%\usepackage[linguistics]{forest}
+\usepackage{smartdiagram}
+%\usepackage[linguistics]{forest}
+\usepackage{smartdiagram}
+
+
 \usepackage{pifont}
 
 \lstset{
@@ -251,6 +305,8 @@ Priority will be given to works whose applicability furthers the understanding o
 
 
 
+
+
 \newpage
 
 \begin{abstract}
@@ -297,6 +353,8 @@ We have independently verified our need while developing two different libraries
 % All article types: you may provide up to 8 keywords; at least 5 are mandatory.
 
 \end{abstract}
+
+
 
 
 
@@ -439,6 +497,52 @@ Formulation
     \label{fig:concepts}
 \end{figure}
 
+
+\begin{figure}[htpb]
+  \centering
+  \resizebox{1.0\columnwidth}{!}{%
+\begin{forest}
+skan tree
+   [Workflow
+        [Programming
+           [GUI]
+           [Shell
+             [Command line]
+             [Command Shell]
+             [Tools
+                [Makefile]
+                [Ant]
+                [ ... ]
+             ]
+           ]
+           [Scripting]
+           [API]
+           [Dataframe]
+           ]
+        ]
+        [Abstraction
+          [YAML]
+          [Loop]
+          [DAG]
+        ]
+        [Runtime Support
+           [Monitoring]
+           [Instrumentation]
+           [Checkpointing]
+           [Benchmarking]
+        ]
+        [Resource Management
+          [Federation]
+          [Provisioning]
+          [Image Management]
+        ]
+   ]
+]
+\end{forest}
+}
+   \caption{Scheduling challenges applied to all levels} 
+  \label{F:graph-challenges}
+\end{figure}
 
 
 
