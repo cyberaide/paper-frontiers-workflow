@@ -39,11 +39,62 @@
 \usepackage{comment}
 \usepackage[color=pink]{todonotes}
 \usepackage{fancyvrb}
-\usepackage[table]{xcolor}
+% \usepackage[table]{xcolor}
+\usepackage{xcolor}
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{makecell}
 \usepackage{pifont}
+
+\usepackage{tikz}
+\usetikzlibrary{mindmap,trees,arrows.meta,shadows}
+
+\newcommand{\ngreen}{bottom color=green!20}
+\newcommand{\ngrey}{bottom color=gray!20}
+\newcommand{\nred}{bottom color=red!20}
+\newcommand{\nwhite}{bottom color=white!20}
+\newcommand{\TODO}[1]{\todo[inline]{#1}}
+\newcommand{\GVL}[1]{{\begin{blue} #1}}
+
+%\setcounter{secnumdepth}{6}
+%\setcounter{tocdepth}{6}
+
+\forestset{
+  skan tree/.style={
+    for tree={
+      drop shadow,
+      text width=3cm,
+      grow'=0,
+      rounded corners,
+      draw,
+      top color=white,
+      bottom color=blue!20,
+      edge={Latex-},
+      child anchor=parent,
+      %parent anchor=children,
+      anchor=parent,
+      tier/.wrap pgfmath arg={tier ##1}{level()},
+      s sep+=2.5pt,
+      l sep+=2.5pt,
+      edge path'={
+        (.child anchor) -- ++(-10pt,0) -- (!u.parent anchor)
+      },
+      node options={ align=center },
+    },
+    before typesetting nodes={
+      for tree={
+        content/.wrap value={\strut ##1},
+      },
+    },
+  },
+}
+%\usepackage[linguistics]{forest}
+\usepackage{smartdiagram}
+
+
+\usepackage{forest}
+
+
 
 \lstset{
   % basicstyle=\scriptsize\ttfamily,
@@ -440,7 +491,54 @@ Formulation
 \end{figure}
 
 
-
+\begin{figure}[!th]
+	\centering
+\resizebox{1\columnwidth}{!}{%
+\begin{forest}
+skan tree
+[Cloud\\ Scheduling Model
+   [Compute-Resource-based
+     [Workflow-based]
+     [Job-based]
+     [VM-based]
+     [Task based]
+     [Container-based]
+     [Function-based]
+     [Platform-based]
+   ]
+   [Data-based
+        [Storage Type]
+        [Volume]
+        [Redundancy]
+        [Bandwidth]
+        [Latency]
+    ]
+    [Location-based
+            [Processor-based]
+            [Server-based]
+            [Room-based]
+            [Datacenter-based]
+            [Region-based]
+            [Global-based]
+        ]  
+    [Energy-based
+        [HVAC]
+        [Green IT]
+        [PUE]
+        [Energy Source]
+        [VM Migration]
+    ]
+    [Security-based
+        [Public]
+        [Private]
+    ]
+   ]
+]
+\end{forest}
+}
+\caption{Cloud Scheduling Model Metrics}
+\label{F:graph-taxonomy}
+\end{figure}
 
 \section{HPC Benchmark  Experiment Workflows}
 
