@@ -49,12 +49,22 @@
 \usepackage{tikz}
 \usetikzlibrary{mindmap,trees,arrows.meta,shadows}
 
+
+\usepackage{forest}
+\usepackage{hyperref}
+\usepackage{adjustbox}
+
+\usetikzlibrary{arrows.meta,shadows}
+
 \newcommand{\ngreen}{bottom color=green!20}
 \newcommand{\ngrey}{bottom color=gray!20}
 \newcommand{\nred}{bottom color=red!20}
 \newcommand{\nwhite}{bottom color=white!20}
 \newcommand{\TODO}[1]{\todo[inline]{#1}}
 \newcommand{\GVL}[1]{{\begin{blue} #1}}
+
+%\usepackage[linguistics]{forest}
+\usepackage{smartdiagram}
 
 %\setcounter{secnumdepth}{6}
 %\setcounter{tocdepth}{6}
@@ -491,54 +501,61 @@ Formulation
 \end{figure}
 
 
-\begin{figure}[!th]
-	\centering
-\resizebox{1\columnwidth}{!}{%
+
+\begin{figure}[htpb]
+  \centering
+  \resizebox{1.0\columnwidth}{!}{%
 \begin{forest}
 skan tree
-[Cloud\\ Scheduling Model
-   [Compute-Resource-based
-     [Workflow-based]
-     [Job-based]
-     [VM-based]
-     [Task based]
-     [Container-based]
-     [Function-based]
-     [Platform-based]
-   ]
-   [Data-based
-        [Storage Type]
-        [Volume]
-        [Redundancy]
-        [Bandwidth]
-        [Latency]
-    ]
-    [Location-based
-            [Processor-based]
-            [Server-based]
-            [Room-based]
-            [Datacenter-based]
-            [Region-based]
-            [Global-based]
-        ]  
-    [Energy-based
-        [HVAC]
-        [Green IT]
-        [PUE]
-        [Energy Source]
-        [VM Migration]
-    ]
-    [Security-based
-        [Public]
-        [Private]
-    ]
+   [Supporting Workflow Concepts
+        [Abstraction \citep{cloudmesh-ee}
+          [YAML
+            [DAG]
+            [Array
+              [Loop]
+            ]
+          ]
+          [Loop]
+          [DAG]
+        ]
+        [Programming
+           [GUI]
+           [Shell
+             [Command line]
+             [Command Shell]
+             [Tools
+                [Makefile]
+                [Ant \citep{las-04-gridant}]
+                [ ... ]
+             ]
+           ]
+           [Scripting]
+           [API \citep{las-02-javacog,las-17-cloudmesh}]
+           [Dataframe \citep{cylon,cylon-radical}]
+        ]
+        [Runtime Support
+           [Monitoring \citep{cloudmesh-ee}]
+           [Instrumentation \citep{cloudmesh-stopwatch,cloudmesh-gpu}]
+           [Checkpointing \citep{??earthquake}]
+           [Benchmarking \citep{cloudmesh-ee}]
+           [Reproducability \citep{cloudmesh-ee}]
+        ]
+        [Resource Management
+          [Remote Access \citep{cloudmesh-vpn}]
+          [Federation \cite{las-08-federated-cloud,las-12-fedcloud-proc}]
+          [Provisioning \citep{las-19-harc-comet,las-17-comet}]
+          [Image Management \citep{las-12-imagemanagement}]
+          [Scheduling \citep{las-01-greed}]
+        ]
    ]
 ]
 \end{forest}
 }
-\caption{Cloud Scheduling Model Metrics}
-\label{F:graph-taxonomy}
+   \caption{Scheduling challenges applied to all levels} 
+  \label{F:graph-challenges}
 \end{figure}
+
+
 
 \section{HPC Benchmark  Experiment Workflows}
 
