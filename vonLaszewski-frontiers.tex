@@ -62,6 +62,8 @@
 \newcommand{\nwhite}{bottom color=white!20}
 \newcommand{\TODO}[1]{\todo[inline]{#1}}
 \newcommand{\GVL}[1]{{\begin{blue} #1}}
+\newcommand{\REPLACE}[2]{{\color{red}\it #1} \begin{quote}{\color{blue}#2}\end{quote}}
+%\newcommand{\REPLACE}[2]{\begin{quote}\textcolor{red}{#1}\end{quote}\\{\textcolor{blue}{#2}}
 
 %\usepackage[linguistics]{forest}
 \usepackage{smartdiagram}
@@ -144,9 +146,6 @@
   keywords={singularity,echo,cms,export,cd,mkdir,nvidia-smi,python,seff}
 }
 
-\newcommand{\TODO}[2]{\todo[inline]{{\bf \color{red} #1} #2}}
-\newcommand{\REPLACE}[2]{{\color{red}\it #1} \begin{quote}{\color{blue}#2}\end{quote}}
-%\newcommand{\REPLACE}[2]{\begin{quote}\textcolor{red}{#1}\end{quote}\\{\textcolor{blue}{#2}}
 
 \newcommand{\YES}{\ding{51}}
 \newcommand{\NO}{$\times$}
@@ -218,9 +217,7 @@ Town Center Four,
 
 \def\corrEmail{laszewski@gmail.com}
 
-\newcommand{\TITLE}{
-Experiment Execution in Support of Community Benchmarks Workflows for HPC
-}
+\newcommand{\TITLE}{Experiment Execution in Support of Community Benchmarks Workflows for HPC}
 
 
 \begin{document}
@@ -229,7 +226,7 @@ Experiment Execution in Support of Community Benchmarks Workflows for HPC
 
 \onecolumn
 
-\begin{comment}
+% \begin{comment}
 %
 % FOR FINAL VERSION OUTCOMMENT
 %
@@ -253,7 +250,7 @@ Experiment Execution in Support of Community Benchmarks Workflows for HPC
 %
 % OUTCOMMENT LINES ABOVE
 %
-\end{comment}
+%\end{comment}
 
 \title{\TITLE}
 
@@ -273,6 +270,7 @@ Experiment Execution in Support of Community Benchmarks Workflows for HPC
 
 
 \maketitle
+
 % For Original Research Articles \citep{conference}, Clinical Trial
 % Articles \citep{article}, and Technology Reports \citep{patent}, the
 % introduction should be succinct, with no subheadings \citep{book}. For
@@ -280,39 +278,7 @@ Experiment Execution in Support of Community Benchmarks Workflows for HPC
 % \citep{chapter}, physical exams and lab results \citep{dataset}.
 
 
-{\bf\parindent0pt Scope statement}
-
-{\em Not part of the main text but needs to be submitted when submitting to the journal}
-
-{\em Provide a short statement to justify how the contents of your manuscript fit within the scope of the selected journal and specialty. Selecting the best matching journal and specialty will ensure the fastest peer review process, and prevent rejections for scope unsuitability.}
-
-
-{\bf\parindent0pt Details of the solicitation}
-
-\begin{itemize}
-\item Deadline is 30 September 2024. 
-    
-    \item Journal/Specialty: Frontiers in High Performance Computing - section Architecture and Systems
-
-\item Research Topic Title: Infrastructure for Workflow Systems
-
-\item Topic Editor(s): Justin M Wozniak, Andre Merzky, Mihael Hategan-Marandiuc
-
-\item The special issue aims to tackle the complexity of workflow systems by encouraging a bottom-up design in which necessary and well-defined components are used to assemble and construct workflow systems. 
-
-\item We seek articles that: explore the nature and properties of such components through architectural and design constraints or through specific use cases that are generalizable
-introduce new and specific workflow components, articulating their necessity for workflow systems
-identify novel ways of integrating existing components into workflow systems
-describe the integration of specific components into existing workflow systems
-introduce models, frameworks, and tools which reduce the complexity of designing, implementing, and reasoning about workflows and workflow systems
-Priority will be given to works whose applicability furthers the understanding of workflows and workflow systems.
-
-
-\end{itemize}
-
-
-
-\newpage
+% \newpage
 
 \begin{abstract}
 
@@ -504,7 +470,7 @@ Formulation
 
 \begin{figure}[htpb]
   \centering
-  \resizebox{1.0\columnwidth}{!}{%
+  \resizebox{0.65\textheight}{!}{%
 \begin{forest}
 skan tree
    [Supporting Workflow Concepts
@@ -530,7 +496,14 @@ skan tree
              ]
            ]
            [Scripting]
-           [API \citep{las-02-javacog,las-17-cloudmesh}]
+           [API \citep{las-02-javacog,las-17-cloudmesh}
+             [Python
+             [Loop]
+             [DAG]
+             [Array]
+             [AI External Workflow Coordination Frameworks]
+             ]
+           ]
            [Dataframe \citep{cylon,cylon-radical}]
         ]
         [Runtime Support
