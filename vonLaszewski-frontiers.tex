@@ -437,7 +437,7 @@ Additionally, von Laszewski participated in the efforts of Cylon for data engine
 
 \section{Requirement}
 
-Hardware
+\subsection{HPC Hardware}
 
 In the US the HPC flag ship computing resources have traditionally
 been offered by national scale compute centers most notably the
@@ -446,51 +446,85 @@ such resources. In addition we see NASA, NOA and others augmenting
 such offers for specialized mission and scientific objective efforts
 serving particular communities. Others such as the DoD related
 facilities are not available in general to the open science
-communities without restrictions. Other resources include commectial hyperscale compute resources offred
-for example through cloud providers.
+communities without restrictions. Other resources include commectial
+hyperscale compute resources offred for example through cloud
+providers as part of hyperscale computing centers.
 
 Beyond these sytems we see regional or topical shared resources of
-medium scale, but also smaller sclae systems that are integrated for
-example in many univeristies to allow direct access to the
+medium scale, but also smaller scale systems that are available for
+example in many univeristies to allow direct access to HPC 
 resources. Such tiered levels are necessary to serve the various
-communities that distinguish themself as art of the computational or
-Many of the systems are listed in the Top500 list, but due to the
-smaller budget and therefore the smaller achieved benchmark many of
-such systems may not be even listed. These smaller systems serve as an
+communities that distinguish themself as art of the computational
+needs or serve specific communities. These smaller systems serve as an
 important on-ramp for training in preparation for accessing the
-leadership class or larger sstems.
-Due to this tiers approach within the research community resources,
-tthe European Union is defining three tiers as part of the
-Partnership for Advanced Computing in Europe (PRACE) is used defined by
+leadership class or larger systems.
+Due to this tiered approach the European Union has defined three tiers as part of the
+Partnership for Advanced Computing in Europe (PRACE) as follows
 {\bf Tier-0:} European centres with petaflop machines,
 {\bf Tier-1:} National centres, and
 {\bf Tier-2:} Regional centers.
   
-We argue that a 3-rd tier may be beneficial. Altough universities
-serve often the regions ther are in and still have fairly large
-machines. We should not forget the Tier-3 that include small clusters
-that are build on a small number of servers. The Tier-4 includes home
-machines owned by the individual researcher. The later tier has
-especially become of impprtance as they porvide potentially
-significant computational power and lack the integration in a shared
-userenvironment thus they are immediatly available during development
-and debugging cycles of the scientific workflow. Hence when combining
-these concepts we identify while focussing on capacity and not
-necessarily regionality:
+However, when classifying the US resources we suggest to use a four
+tiered model that classifies resources mostly by capacity.
 
 \begin{itemize}
-\item {\bf Tier-0:} Leadership Class machines with world wide leading
+\item {\bf Capacity Tier-0:} Leadership Class machines with world wide leading
   performance (Listed in the top of the Top-500 list),
-\item {\bf Tier-1:} Machines in the 25\% Top-500 List which may be part of
+\item {\bf Capacity Tier-1:} Machines in the uper portion of the Top-500 List which may be part of
   National centers, Reginal Centers  or Universities, 
-\item {\bf Tier-2:} Machines which performence is similar to machine
+\item {\bf Capacity Tier-2:} Machines which performence is similar to machine
   in the rest of the Top 500 list,
-\item {\bf Tier-3:} Smaller scale HPC funded by a university or entity
+\item {\bf Capacity Tier-3:} Smaller scale HPC funded by a university or entity
   that are no longer listed in the Top500 list, and 
-\item {\bf Tier-4:} Privately owned machines supporting development
+\item {\bf Capacity Tier-4:} Privately owned machines supporting development
   and debugging.
   
 \end{itemize}
+
+The later tier has especially become of impprtance as they porvide potentially
+significant computational power for developing a subset of scientific
+applications but lack the integration in a shared
+user environment. Thus they are immediatly available during development
+and debugging cycles of the scientific workflow.
+
+When accessing these rosources they are mostly accessed through well
+established queuing/batch systems to allow shared usage among the
+community accessing the resources. On larger systems especially when
+large scale experiements are needed this may result in significant
+runtime delays.
+
+Scientific Workflows must be able to interface with such systems
+easily. Especially at the university level we see however a
+significant complication in the use of such resources as often the
+machines integrate different heterogeneous resources into the batch
+system that make intrinsic knowledge aobout the design and
+availability of specific resources necessary by its users. Furthermore
+such systems may include older hradware, or have filesystems not well
+integrated leading to significant slowdown of the potential
+performance as we have discovered in \citep{earthquake?}.
+
+In general all resources are accessible through remote access and is
+it well established that two concepts are used to access them. First,
+the use of SSH and secenond some systems also provide additional
+security through VPNs or 2 factor authentication (including RSA
+keys). Hence, if such systems are used in concert, we must be able to
+integrate with the various authentication mechanisms. Grids were
+supposed to solve this issue and at least for some to the US based
+systems is continued in the use of incommon. However we found it is
+often easier to gather the authentication mechanisms and have the
+client easily authenticate to the systems to interface with them
+directly through their different keys. This is based on experience
+dating back even 30 years ago.
+
+To simplify such access we have developed additional libraries in
+support of the newere technologies going beyond the use of SSH. This
+includes the introdcution of a split-VPN library and toolkit that
+allows accessing multiple VPNs dependent on which resource is beeing
+used and through which VPN this resource is being secured. Problematic
+in this case can however be if for example a university has decided
+not to universilly support split VPN.
+
+
 
 
 
@@ -507,7 +541,7 @@ Software
 
 Datamanagement
 
-
+\end{verbatim}
 
 \subsection{Summary of Workflow Related activitie to support Scientific Computing}
 
