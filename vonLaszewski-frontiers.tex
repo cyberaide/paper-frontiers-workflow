@@ -459,12 +459,12 @@ Formulation
 
 
 
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=0.70\columnwidth]{images/concepts}
-    \caption{Concepts.}
-    \label{fig:concepts}
-\end{figure}
+%\begin{figure}[htb]
+%  \centering
+%    \includegraphics[width=0.70\columnwidth]{images/concepts}
+%    \caption{Concepts.}
+%    \label{fig:concepts}
+% \end{figure}
 
 
 
@@ -475,32 +475,32 @@ Formulation
 skan tree
    [Supporting Workflow Concepts
         [Abstraction \citep{cloudmesh-ee}
-          [YAML
-            [DAG]
-            [Array
-              [Loop]
+          [YAML \citep{cloudmesh-ee}
+            [DAG \citep{cloudmesh-ee}]
+            [Array \citep{cloudmesh-ee}
+              [Loop \citep{cloudmesh-ee}] 
             ]
           ]
-          [Loop]
-          [DAG]
+          [Loop \citep{cloudmesh-ee}]
+          [DAG \citep{cloudmesh-ee}]
         ]
         [Programming
-           [GUI]
-           [Shell
-             [Command line]
-             [Command Shell]
+           [GUI \citep{cloudmesh-cc}]
+           [Shell \citep{cloudmesh-ee}
+             [Command line \citep{cloudmesh-ee}]
+             [Command Shell \citep{cloudmesh-ee}]
              [Tools
                 [Makefile]
                 [Ant \citep{las-04-gridant}]
                 [ ... ]
              ]
            ]
-           [Scripting]
+           [Scripting \citep{cloudmesh-ee}]
            [API \citep{las-02-javacog,las-17-cloudmesh}
-             [Python
-             [Loop]
-             [DAG]
-             [Array]
+             [Python \citep{cloudmesh-ee}
+             [Loop \citep{cloudmesh-ee}]
+             [DAG \citep{cloudmesh-ee}]
+             [Array \citep{cloudmesh-ee}]
              [AI External Workflow Coordination Frameworks]
              ]
            ]
@@ -509,7 +509,7 @@ skan tree
         [Runtime Support
            [Monitoring \citep{cloudmesh-ee}]
            [Instrumentation \citep{cloudmesh-stopwatch,cloudmesh-gpu}]
-           [Checkpointing \citep{??earthquake}]
+           [Checkpointing \citep{las-2023-mlcommons-edu-eq}]
            [Benchmarking \citep{cloudmesh-ee}]
            [Reproducability \citep{cloudmesh-ee}]
         ]
@@ -714,7 +714,7 @@ between components and stages of the workflow.
 \hline
 \bf Feature &  \makecell{\bf Cloudmesh \\ \bf Experiment Executor and \\\bf Compute Coordinator} &  \bf SmartSim \\
 \hline
-\multicolumn{3}{|l|}{\cellcolor{gray!20}\bf\em Scheduler}\\
+\multicolumn{3}{|l|}{\bf\em Scheduler}\\
 \hline
 Queue & SLURM, LSF, SSH, others possible &  SLURM, PBS, LSF, SGE \\
 Batch Submission & \YES & \YES \\
@@ -723,21 +723,21 @@ DAGs  & \YES  & \YES \\
 Inferencing Capabilities & \NO & \YES \\
 Ensemble execution & \YES & \YES \\
 \hline
-\multicolumn{3}{|l|}{\cellcolor{gray!20}\bf\em Interface}\\
+\multicolumn{3}{|l|}{\bf\em Interface}\\
 \hline
 Python API & \YES & \YES \\
 Command line & \YES & \NO \\
 Command shell & \YES & \NO \\
 GUI  & (\YES) & \NO \\
 \hline
-\multicolumn{3}{|l|}{\cellcolor{gray!20}\bf\em Parameters}\\
+\multicolumn{3}{|l|}{\bf\em Parameters}\\
 \hline
 YAML & \YES & \YES  \\
 multi-value YAML & \YES & \NO \\
 Gridsearch & \YES & \YES \\
 Customizable & \YES & \YES \\
 \hline
-\multicolumn{3}{|l|}{\cellcolor{gray!20}\bf\em Federation}\\
+\multicolumn{3}{|l|}{\bf\em Federation}\\
 \hline
 SSH & \YES & \YES \\
 Split VPN support & \YES & \NO \\
@@ -745,11 +745,11 @@ Build in parallel multi resource experiments & \YES & \NO \\
 Combine results by multiple users & \YES & \NO \\
 Combine results from multiple resources & \YES & \NO \\
 \hline
-\multicolumn{3}{|l|}{\cellcolor{gray!20}\bf\em Expandable}\\
+\multicolumn{3}{|l|}{\bf\em Expandable}\\
 \hline
 Plugin Manager & \YES & \NO \\
 \hline
-\multicolumn{3}{|l|}{\cellcolor{gray!20}\bf\em Distribution}\\
+\multicolumn{3}{|l|}{\bf\em Distribution}\\
 \hline
 only pip & \YES & Without Redis \\
 pip with compile & N/A & With Redis \\
@@ -758,7 +758,7 @@ Singularity & \YES & \YES \\
 Docker & \YES & \YES \\
 Licence  & Apache 2.0 & BSD-2-Clause license \\
 \hline
-\multicolumn{3}{|l|}{\cellcolor{gray!20}\bf\em Other Deployments}\\
+\multicolumn{3}{|l|}{\bf\em Other Deployments}\\
 \hline
 AWS Parallel Cluster & \YES & \NO \\ 
 AWS Kubernetes  & in progress & \NO \\
