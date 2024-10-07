@@ -217,7 +217,7 @@ Town Center Four,
 
 \def\corrEmail{laszewski@gmail.com}
 
-\newcommand{\TITLE}{Experiment Execution in Support of Community Benchmarks Workflows for HPC}
+\newcommand{\TITLE}{Experiment Execution in Support of Community Benchmark Workflows for HPC}
 
 
 \begin{document}
@@ -282,39 +282,52 @@ Town Center Four,
 
 \begin{abstract}
 
-\section{}
-
-leadership class computing add ... term and section
-difference between doe and NSF .... ??? I do not even know. 
-fairly large machines no matter if doe or not
-order of 1000+ nodes we need to come up with some definition
-
-university HPC vs Leadership class
-tier-0 hpc agglomerated in top 500 which in top 500?
-
-put link her of definitan.
-
-define scale
-also distingushed by examples.
+  \section{}
 
 
-hyperscale = datacenter mace 2.2 into 2.4 
+Over many decades High Performance Computing systems have been made
+available to the research community through research activities as
+well as commercially available solutions. The use of such systems has
+traditionally been restrictive due to the high costs of computing
+resources as well as the complex software to offer them efficiently to
+the community. Over time we saw also the utilization of federated
+resources such as Grids, Clouds, and todays hyperscale data
+centers. Still despite the many software systems and frameworks in
+support of these resources the utilization of them has been a
+challange, especially in the academic community educating the next
+generation of scientists. We also found that the use of benchmarks on
+various machines even if they are not federated play a significant
+hurdle in advertising a compute resource capability to the
+community. While popular frameworks such as Gatways and on the other
+spectrum Jupyter notebooks promise the simplification of the use, It
+is still important that scientific benchmarks are available that
+outline how such machines can be best utilized. This is best done in
+the form of workflow templates for the scientific application that can
+then be adapted accordingly to other scientific applications.
 
+Within this paper, we focus first on identifying some very common
+usage patterns that outline which workflow templates that we have
+found most useful based on our experiences over many
+decades. Naturally there are many other patterns available that may be
+addressed by other frameorks. However, we focus here on templates that
+have been common to us based on decades of use of HPC system dating
+back to the early parallel computers.  We especially have learned from
+our experience with the MLCommons Science working group that these
+issues are of significance and addressing them through simple tools
+improves the readiness of the community. Hence they can be integrated
+in what we term benchmark-carpentry which is one particular aspect of
+our workflow applications.
 
-\citep{cloudmesh-ee}
-
-issue how to get urls into refernces.
-
-development challang section
-
-
-
-Over many decades High Performance Computing systems have been made available to the research community through research activities as well as commercially available solutions. The use of such systems has traditionally been restrictive due to the high costs of computing resources as well as the complex software to offer them efficiently to the community. Over time we saw also the utilization of federated resources such as Grids, Clouds, and todays hyperscale data centers. Still despite the many software systems and frameworks in support of these resources the utilization of them has been a challange, especially in the academic community educating the next generation of scientists. We also found that the use of benchmarks on various machines even if they are not federated play a significant hurdle in advertising a compute resource capability to the community. While popular frameworks such as Gatways and on the other spectrum Jupyter notebooks promise the simplification of the use, It is still important that scientific benchmarks are available that outline how such machines can be best utilized. This is best done in the form of workflow templates for the scientific application that can then be adapted accordingly to other scientific applications.
-
-Within this paper, we focus first on identifying some very common usage patterns that outline which workflow templates that we have found most useful.. Naturally there are many other patterns available that may be addressed by other frameorks. However, we focus here on templates that have been common to us based on decades of use of HPC system dating back to the early parallel computers.
-We especially have learned from our experience with the MLCommons Science working group that these issues are of significance and addressing them through simple tools improves the readiness of the community. Hence they can be integrated in what we term benchmark-carpentry which is one particular aspect of our workflow applications.
-
-We have independently verified our need while developing two different libraries that upon closer inspection provide a large amount of overlap in functionality. These systems are the Experiment Executor which is part of a larger bag of services distributed as part of cloudmesh that has been used for more than a decade, as well as SmartSim developed by Hewlett Packard which similarly addresses experiment management. The application has been tested on various scientific applications. In our earlier work, this was done on cloudmask and earthquake prediction. Here we focus on the need to develop a surrogate for computational fluid dynamics.
+We have independently verified our need while developing two different
+libraries that upon closer inspection provide a large amount of
+overlap in functionality. These systems are the Experiment Executor
+which is part of a larger bag of services distributed as part of
+cloudmesh that has been used for more than a decade, as well as
+SmartSim developed by Hewlett Packard which similarly addresses
+experiment management. The application has been tested on various
+scientific applications. In our earlier work, this was done on
+cloudmask and earthquake prediction. Most recent work also includes
+verification as part of Ocean modelling. Here we focus on the need to develop a surrogate for computational fluid dynamics.
 
 
 \tiny \keyFont{ \section{Keywords:} deep learning, benchmarking, hyper
@@ -421,6 +434,81 @@ Additionally, von Laszewski participated in the efforts of Cylon for data engine
 
 {\bf Geoffrey C. Fox} TBD|
 
+
+\section{Requirement}
+
+Hardware
+
+In the US the HPC flag ship computing resources have traditionally
+been offered by national scale compute centers most notably the
+Department of Energy and the National Science foundation have funded
+such resources. In addition we see NASA, NOA and others augmenting
+such offers for specialized mission and scientific objective efforts
+serving particular communities. Others such as the DoD related
+facilities are not available in general to the open science
+communities without restrictions. Other resources include commectial hyperscale compute resources offred
+for example through cloud providers.
+
+Beyond these sytems we see regional or topical shared resources of
+medium scale, but also smaller sclae systems that are integrated for
+example in many univeristies to allow direct access to the
+resources. Such tiered levels are necessary to serve the various
+communities that distinguish themself as art of the computational or
+Many of the systems are listed in the Top500 list, but due to the
+smaller budget and therefore the smaller achieved benchmark many of
+such systems may not be even listed. These smaller systems serve as an
+important on-ramp for training in preparation for accessing the
+leadership class or larger sstems.
+Due to this tiers approach within the research community resources,
+tthe European Union is defining three tiers as part of the
+Partnership for Advanced Computing in Europe (PRACE) is used defined by
+{\bf Tier-0:} European centres with petaflop machines,
+{\bf Tier-1:} National centres, and
+{\bf Tier-2:} Regional centers.
+  
+We argue that a 3-rd tier may be beneficial. Altough universities
+serve often the regions ther are in and still have fairly large
+machines. We should not forget the Tier-3 that include small clusters
+that are build on a small number of servers. The Tier-4 includes home
+machines owned by the individual researcher. The later tier has
+especially become of impprtance as they porvide potentially
+significant computational power and lack the integration in a shared
+userenvironment thus they are immediatly available during development
+and debugging cycles of the scientific workflow. Hence when combining
+these concepts we identify while focussing on capacity and not
+necessarily regionality:
+
+\begin{itemize}
+\item {\bf Tier-0:} Leadership Class machines with world wide leading
+  performance (Listed in the top of the Top-500 list),
+\item {\bf Tier-1:} Machines in the 25\% Top-500 List which may be part of
+  National centers, Reginal Centers  or Universities, 
+\item {\bf Tier-2:} Machines which performence is similar to machine
+  in the rest of the Top 500 list,
+\item {\bf Tier-3:} Smaller scale HPC funded by a university or entity
+  that are no longer listed in the Top500 list, and 
+\item {\bf Tier-4:} Privately owned machines supporting development
+  and debugging.
+  
+\end{itemize}
+
+
+
+
+
+
+\section{Notes}
+
+\begin{verbatim}  
+
+
+
+Software
+
+Datamanagement
+
+
+
 \subsection{Summary of Workflow Related activitie to support Scientific Computing}
 
 Workflows to coordinate work on heterogeneous computing resources
@@ -485,7 +573,8 @@ skan tree
           [DAG \citep{cloudmesh-ee}]
         ]
         [Programming
-           [GUI \citep{cloudmesh-cc}]
+           [GUI \citep{cloudmesh-cc,las-03-ftp,las-05-workflow-jgc}]
+           [Portal \citep{las-99-rostock,las-06-guss-j,las-01-pse,las-02-cactus-j}]
            [Shell \citep{cloudmesh-ee}
              [Command line \citep{cloudmesh-ee}]
              [Command Shell \citep{cloudmesh-ee}]
@@ -524,7 +613,9 @@ skan tree
 ]
 \end{forest}
 }
-   \caption{Scheduling challenges applied to all levels} 
+   \caption{Scheduling challenges applied to all levels. We added not
+     all but selected publications that we worked on as part of these
+     workflow Challanges.} 
   \label{F:graph-challenges}
 \end{figure}
 
