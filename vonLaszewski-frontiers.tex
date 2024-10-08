@@ -435,27 +435,19 @@ Additionally, von Laszewski participated in the efforts of Cylon for data engine
 {\bf Geoffrey C. Fox} TBD|
 
 
-\section{Requirement}
+\section{Requirements}
 
 \subsection{HPC Hardware}
 
-In the US the HPC flag ship computing resources have traditionally
-been offered by national scale compute centers most notably the
-Department of Energy and the National Science foundation have funded
-such resources. In addition we see NASA, NOA and others augmenting
-such offers for specialized mission and scientific objective efforts
-serving particular communities. Others such as the DoD related
-facilities are not available in general to the open science
-communities without restrictions. Other resources include commectial
-hyperscale compute resources offred for example through cloud
-providers as part of hyperscale computing centers.
+In the US the HPC flag ship computing resources have traditionally been offered by national scale compute centers most notably the Department of Energy and the National Science foundation have funded such resources. In addition we see NASA, NOAA and others augmenting such offers for specialized mission and scientific objective efforts serving particular communities. Others such as the DoD related facilities are not available in general to the open science communities without restrictions, hence, we exclude them from our discussion. Other resources include commercial compute resources offered for example through cloud
+providers as part of hyper-scale computing centers.
 
-Beyond these sytems we see regional or topical shared resources of
+Beyond these systems we see additional regional or topical shared resources of
 medium scale, but also smaller scale systems that are available for
-example in many univeristies to allow direct access to HPC 
-resources. Such tiered levels are necessary to serve the various
-communities that distinguish themself as art of the computational
-needs or serve specific communities. These smaller systems serve as an
+example in many universities to allow direct access to HPC 
+resources. Such tiered levels of HPC resources are necessary to serve the various
+communities that distinguish themselves as part of their computational
+needs based on topic and scale. These smaller systems serve also as an
 important on-ramp for training in preparation for accessing the
 leadership class or larger systems.
 Due to this tiered approach the European Union has defined three tiers as part of the
@@ -464,86 +456,88 @@ Partnership for Advanced Computing in Europe (PRACE) as follows
 {\bf Tier-1:} National centres, and
 {\bf Tier-2:} Regional centers.
   
-However, when classifying the US resources we suggest to use a four
-tiered model that classifies resources mostly by capacity.
+However, when classifying the US resources we suggest to use a five
+tiered model that classifies resources mostly by capacity:
 
 \begin{itemize}
 \item {\bf Capacity Tier-0:} Leadership Class machines with world wide leading
-  performance (Listed in the top of the Top-500 list),
-\item {\bf Capacity Tier-1:} Machines in the uper portion of the Top-500 List which may be part of
-  National centers, Reginal Centers  or Universities, 
-\item {\bf Capacity Tier-2:} Machines which performence is similar to machine
-  in the rest of the Top 500 list,
+  performance (Listed in the top of the Top-500 list). Such machines include also large specialized data file systems to allow serving the many computational nodes. Recently, such systems include a large number of GPUs. They are typically served by batch queuing systems and serve the most challanging scientific applications. An allocation request is typically needed to get access to such machines.
+\item {\bf Capacity Tier-1:} Machines in the upper portion of the Top-500 List which may be part of   National centers, Regional Centers  or Universities. Such systems are similar to the one in Tier-0 but of significant lower capabilities.
+An allocation request is typically needed to get access to such machines.
+\item {\bf Capacity Tier-2:} Machines which performance is similar to machine
+  in the rest of the Top 500 list. These machines are either smaller sytems or if still operated older HPC machines that have been replaced by newer machines.
+  An allocation request is typically needed to get access to such machines. In case of universities the HPC is shared based on internally set policies.
 \item {\bf Capacity Tier-3:} Smaller scale HPC funded by a university or entity
-  that are no longer listed in the Top500 list, and 
+  that are no longer listed in the Top500 list. Many universities have their own small clusters that are not as powerful but serve their individual communities or even labs. They may or may not run batch systems and at times use other software such as OpenStack, or more recently Kubernetes. 
 \item {\bf Capacity Tier-4:} Privately owned machines supporting development
-  and debugging.
+  and debugging. These are machines operated by the individual researchers that may include still powerful GPU or CPUs often performing faster then even those offered by their own universities. They provide an excellent cost performance option for many researchers to develop and debug their programs quickly if the scale of the targeted application allows.
   
 \end{itemize}
 
-The later tier has especially become of impprtance as they porvide potentially
+The later tier has especially become of importance as they provide potentially
 significant computational power for developing a subset of scientific
 applications but lack the integration in a shared
-user environment. Thus they are immediatly available during development
+user environment. Thus they are immediately available during development
 and debugging cycles of the scientific workflow.
 
-When accessing these rosources they are mostly accessed through well
+When accessing these resources they are mostly accessed through well
 established queuing/batch systems to allow shared usage among the
 community accessing the resources. On larger systems especially when
-large scale experiements are needed this may result in significant
+large scale experiments are needed this may result in significant
 runtime delays.
 
 Scientific Workflows must be able to interface with such systems
 easily. Especially at the university level we see however a
 significant complication in the use of such resources as often the
 machines integrate different heterogeneous resources into the batch
-system that make intrinsic knowledge aobout the design and
+system that make intrinsic knowledge about the design and
 availability of specific resources necessary by its users. Furthermore
-such systems may include older hradware, or have filesystems not well
+such systems may include older hardware, or have file systems not well
 integrated leading to significant slowdown of the potential
 performance as we have discovered in \citep{earthquake?}.
 
 In general all resources are accessible through remote access and is
 it well established that two concepts are used to access them. First,
-the use of SSH and secenond some systems also provide additional
+the use of SSH and secondly, some systems also provide additional
 security through VPNs or 2 factor authentication (including RSA
 keys). Hence, if such systems are used in concert, we must be able to
 integrate with the various authentication mechanisms. Grids were
 supposed to solve this issue and at least for some to the US based
-systems is continued in the use of incommon. However we found it is
+systems is continued in the use of inCommon \citep{incommon}. However we found it is
 often easier to gather the authentication mechanisms and have the
 client easily authenticate to the systems to interface with them
 directly through their different keys. This is based on experience
-dating back even 30 years ago.
+dating back even 30 years ago \cite{las-99-loosely}. Hence we refer to such workflow integrated resources as heterogeneous loosely coupled resources.
 
-To simplify such access we have developed additional libraries in
-support of the newere technologies going beyond the use of SSH. This
-includes the introdcution of a split-VPN library and toolkit that
-allows accessing multiple VPNs dependent on which resource is beeing
-used and through which VPN this resource is being secured. Problematic
-in this case can however be if for example a university has decided
-not to universilly support split VPN.
+To simplify access to several of them, we have developed additional libraries as part of cloudmesh in
+support of the newer technologies going beyond the use of SSH. This includes the introduction of a split-VPN library and toolkit that allows accessing multiple VPNs dependent on which resource is being used and through which VPN this resource is being secured. Problematic in this case can however be if for example a university has decided not to universally support split VPN.
 
 
 
+\begin{figure}[htb]
+  \centering
+    \includegraphics[width=0.70\columnwidth]{images/top500/top500.pdf}%    \caption{Top500.}
+    \label{fig:top500}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+    \includegraphics[width=0.70\columnwidth]{images/top500/top30.pdf}%    \caption{Top30.}
+    \label{fig:top30}
+\end{figure}
+
+Equilibrium index is 7 where the first 7 resources of the list are equal to the sum of all other 493 resources.
+
+\subsubsection{Summary of requirements}
 
 
 
+\subsection{Software}
+
+\subsection{Data Management}
 
 
-\section{Notes}
-
-\begin{verbatim}  
-
-
-
-Software
-
-Datamanagement
-
-\end{verbatim}
-
-\subsection{Summary of Workflow Related activitie to support Scientific Computing}
+\subsection{Summary of Workflow Related activities to support Scientific Computing}
 
 Workflows to coordinate work on heterogeneous computing resources
 
@@ -695,7 +689,7 @@ In particular, users often operate within fixed size allocations (e.g. users
 have N node-hours with a pre-specified end date). Executing experiments on
 traditional HPC platforms is characterized by submitting batch jobs to the
 workload manager (e.g. SLURM or PBS). Additionally, because the amount of work
-is largely static, large amounts of resources are allocated for long blocks of
+is primarily static, large amounts of resources are allocated for long blocks of
 time (hours, days or weeks). Long-running tasks on login nodes are generally
 discouraged although more recent HPC platforms include the concept of `workflow'
 nodes that can be used to deploy long-running. This leads to experiment
@@ -991,6 +985,8 @@ Figure \ref{fig:cc-3}A shows the REST specification and \ref{fig:cc-3}B shows th
 \subsubsection{Parameterized Experiment Workflow Job Generator}
 \label{sec:workflow-ee}
 
+
+
 In traditional machine learning workflows, hyperparameter tuning and configuration are key elements in assessing and optimizing the performance of models. However, scaling hyperparameters for highly parallel execution with heterogeneous hardware is complex.
 
 Cloudmesh-ee \cite{cloudmesh-ee,las-2023-escience} is a hyperparameter and configuration management toolkit designed to address the generation of batch jobs with a consistent and configurable interface based on hyperparameter values across multiple development toolchains. One of its functions is to create batch jobs based on parameterized job specifications and configuration files.  Cloudmesh-ee is part of the Cloudmesh toolkit, a set of tools and libraries for managing cloud and HPC resources from the command line, REST interfaces, or GUI's.  Cloudmesh-ee can use a variety of queuing systems and submission commands. Currently, we provide interfaces to Slurm, LSF, and ssh. 
@@ -1066,6 +1062,18 @@ Our progress with the earthquake benchmark would not have been possible if we di
 We have practical experience from multiple teams where coders spent multiple months developing programs and strategies to coordinate their experiment executions; to circumvent this expenditure, the cloudmesh experiment executor generated such permutations within one day on a variety of systems.
 
 \end{quote}
+
+\subsection{SmartSim}
+
+SmartSim in contrast to Cloudmesh follows a paradigm where the user describes the parameterization of a workflow and its components within a single python-based driver file. Within this driver file, the user instantiates `Model' and `Ensemble' objects that have three separate ways of modifying the behavior of the application
+\begin{enumerate}
+    \item Configuration parameters in templated input files
+    \item Collections of input files
+    \item Runtime arguments passed to the executable
+\end{enumerate}
+For the first two items, the run directories for the object are created during a `generation' step. The resulting
+
+While SmartSim does not have the concept of a configuration file as a native concept, users have employed JSON, YAML, and the Hydra framework \cite{Hadan2019Hydra}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Applications}
