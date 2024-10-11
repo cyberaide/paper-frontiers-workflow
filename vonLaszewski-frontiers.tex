@@ -220,6 +220,15 @@ Town Center Four,
 
 \newcommand{\TITLE}{Experiment Execution in Support of Community Benchmark Workflows for HPC}
 
+\makeatletter
+\begingroup\endlinechar=-1\relax
+       \everyeof{\noexpand}%
+       \edef\x{\endgroup\def\noexpand\homepath{%
+         \@@input|"kpsewhich --var-value=HOME" }}\x
+\makeatother
+
+
+\def\overleafhome{/home/whatever}% change as appropriate
 
 \begin{document}
 
@@ -315,6 +324,24 @@ verification as part of Ocean modeling. Here we focus on the need to develop a s
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Check if compiling with Overleaf
+\ifdefined\OVERLEAF
+    % Code for Overleaf
+    This document is compiled on Overleaf.
+\else
+    % Code for local or other environments
+    This document is compiled locally or on another platform.
+\fi
+
+
+\ifx\homepath\overleafhome
+ Overleaf.
+\else
+ Not Overleaf.
+\fi
+
+print \homepath
 
 Benchmarks are useful for comparing the performance of computing resources and identifying them based on a single or a set of applications run on them. Application users can benefit from them while identifying benchmarks that are closely related to their applications in order to assess and potentially predict what is needed to run their applications. Typical benchmarks include measuring the performance of CPUs, GPUs Data storage, as well as energy consumption. While tackling the most challenging problems multiple compute resources as part of HPC are needed.  Here additional machine characteristics such as network performance. The shared nature of such resources poses another complication as shared multiuser resource scheduling while sharing the resources at runtime, or sharing the resources through scheduling systems introducing wait times makes predicting real-time performance very challenging. Hence in many systems a benchmark is run as a single user and the queue wait time is often ignored.
 
@@ -456,15 +483,32 @@ can easily be ported to Windows as we have shown in cloudmesh, or
 Windows Subsystem for Linux (WSL) can be used.  
 
 
-
 \tcbset{
-    colback=gray!20,
+    colback=yellow!20,
     colframe=yellow!50!black,
     title=Colored Box,
     breakable, % Makes the box content breakable across pages
 }
 
-\begin{tcolorbox}[title=Implications from Section \ref{sec:hw-requirements} Hardware requirements]
+
+\newenvironment{BOX}[1]
+{
+    \ifoverleaf
+        \noindent\hline
+    \else
+        \begin{tcolorbox}[title=#1]
+    \fi
+}
+{
+    \ifoverleaf
+        \noindent\hline
+    \else
+        \end{tcolorbox}
+    \fi
+}
+
+
+\begin{BOX}[Implications from Section \ref{sec:hw-requirements} Hardware requirements]
 
 \begin{itemize}
 \item {\bf Hardware at scale:} {\it The hardware that we need to
@@ -511,7 +555,7 @@ Windows Subsystem for Linux (WSL) can be used.
      they are dominant on HPC machines due to security aspects
      isolating the runtime environment. }
   \end{itemize}
-\end{tcolorbox}
+\end{BOX}
 
 \subsubsection{Summary of requirements}
 
