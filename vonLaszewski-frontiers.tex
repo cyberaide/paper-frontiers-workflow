@@ -45,7 +45,6 @@
 \usepackage{listings}
 \usepackage{makecell}
 \usepackage{pifont}
-\usepackage{subcaption} 
 
 \usepackage{tikz}
 \usetikzlibrary{mindmap,trees,arrows.meta,shadows}
@@ -435,12 +434,19 @@ To simplify access to several of them, we have developed additional libraries as
 support of the newer technologies going beyond the use of SSH. This includes the introduction of a split-VPN library and toolkit that allows accessing multiple VPNs dependent on which resource is being used and through which VPN this resource is being secured. Problematic in this case can however be if, for example, a university has decided not to universally support split VPN.
 
 \begin{figure}[htb]
-    \centering
-    \begin{tabular}{cc}
-        \vtop{\null\hbox{\includegraphics[width=0.45\textwidth]{images/top500/top500.pdf}}} &
-        \vtop{\null\hbox{\includegraphics[width=0.45\textwidth]{images/top500/top30.pdf}}} \\
-        {\bf a.} Top500. & {\bf b.} Top30. \\
-    \end{tabular}
+    \begin{subfigure}{0.45\columnwidth}
+        \centering
+        \includegraphics[height=1in]{images/top500/top500.png}
+        \caption{Top500.}
+        \label{fig:top500}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.45\columnwidthwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/top500/top30.png}
+        \caption{Top30.}
+        \label{fig:top30}
+    \end{subfigure}
     
     \caption{Top500 List Comparison with the index equilibrium at about 7.}
     \label{fig:top500comparison}
