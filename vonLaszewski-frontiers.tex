@@ -46,6 +46,7 @@
 \usepackage{makecell}
 \usepackage{pifont}
 \usepackage{subcaption} 
+\usepackage[framemethod=tikz]{mdframed}
 
 \usepackage{tikz}
 \usetikzlibrary{mindmap,trees,arrows.meta,shadows}
@@ -472,20 +473,23 @@ Windows Subsystem for Linux (WSL) can be used.
     breakable, % Makes the box content breakable across pages
 }
 
-\newenvironment{BOX}[1]
+\newenvironment{BOX}[1][title]
 {
     \ifx\homepath\overleafhome
         \bigskip
-        \hline
         \begin{quote}
+        \begin{mdframed}[hidealllines=true,backgroundcolor=yellow!20]
+        \hline
+        {\bf #1}
     \else
         \begin{tcolorbox}[title=#1]
     \fi
 }
 {
     \ifx\homepath\overleafhome
-        \end{quote}
         \hline
+        \end{mdframed}
+        \end{quote}
     \else
         \end{tcolorbox}
     \fi
