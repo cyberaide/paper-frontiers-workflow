@@ -475,14 +475,17 @@ Windows Subsystem for Linux (WSL) can be used.
 \newenvironment{BOX}[1]
 {
     \ifx\homepath\overleafhome
-        {\bf\noindent\hline #1 \hline}
+        \bigskip
+        \hline
+        \begin{quote}
     \else
         \begin{tcolorbox}[title=#1]
     \fi
 }
 {
     \ifx\homepath\overleafhome
-        \noindent\hline
+        \end{quote}
+        \hline
     \else
         \end{tcolorbox}
     \fi
