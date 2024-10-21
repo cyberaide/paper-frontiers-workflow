@@ -162,8 +162,8 @@
 
 \def\firstAuthorLast{von Laszewski {et~al.}} 
 \def\Authors{Gregor von Laszewski\,$^{1,*}$,
-Wesley Brewer,$^{3}$
-Andrew Shao,$^{4}$
+Wesley Brewer,$^{2}$
+Andrew Shao,$^{3}$
 Christine R. Kirkpatrick,$^{4}$
 % J.P. Fleischer,$^{1}$
 % Harshad Pitkar,,$^{5}$
@@ -189,7 +189,6 @@ University of Virginia,
 
 $^{2}$
 Oak Ridge National Laboratory,
-P.O. Box 2008,
 Oak Ridge, TN 37831, USA
 
 $^{3}$
@@ -297,7 +296,7 @@ Town Center Four,
 
   Over many decades High Performance Computing systems have been made available to the research community through research activities and recently made also available through commercially available cloud solutions. The use of such systems has traditionally been restrictive due to the high costs of computing resources as well as the complex software to offer them efficiently to the community. Over time we also saw the utilization of federated resources such as Grids, Clouds, and today's hyperscale data centers. Still despite the many software systems and frameworks in support of these resources the utilization of them has been a challenge, especially in the academic community educating the next generation of scientists. We also found that the use of benchmarks on various machines even if they are not federated plays a significant hurdle in advertising a compute resource capability to the community. While popular frameworks such as Gatways and on the other spectrum Jupyter notebooks promise the simplification of the use, It is still important that scientific benchmarks are available that outline how such machines can be best utilized. This is best done in the form of workflow templates for the scientific application that can then be adapted accordingly to other scientific applications.
 
-  Within this paper, we focus first on identifying some pervasive usage patterns that outline which workflow templates we have found most useful based on our experiences over many decades. Naturally, there are many other patterns available that may be addressed by other frameworks. However, we focus here on templates that have been common to us based on decades of use of HPC systems dating back to the early parallel computers.  We especially have learned from our experience with the MLCommons Science working group that these issues are of significance and addressing them through simple tools improves the readiness of the community. Hence they can be integrated into what we term benchmark carpentry which is one particular aspect of our workflow applications.
+  Within this paper, we focus first on identifying some pervasive usage patterns that outline which workflow templates we have found most useful based on our experiences over many decades. Naturally, there are many other patterns available that may be addressed by other frameworks. However, we focus here on templates that have been common to us based on decades of use of HPC systems dating back to the early parallel computers.  We especially have learned from our experience with the MLCommons Science working group that these issues are of significance and addressing them through simple tools improves the readiness of the community. Hence they can be integrated into what we term \textit{benchmark carpentry}, which is one particular aspect of our workflow applications.
 
 We have independently verified our need while developing two different
 libraries that upon closer inspection provide a large amount of
@@ -391,8 +390,17 @@ workflows.
 
 \input{vonLaszewski-frontiers-graph}
    
-{\bf Wes Brewer} TBD
-\TODO{Wes: add your workflow work here}
+{\bf Surrogate Model Workflows}
+% \TODO{Wes: add your workflow work here}
+
+Fig. \ref{fig:surrogate} provides a schematic of a typical machine-learned \textit{surrogate model} training and deployment workflow. Simulations are run on HPC using a variety of input parameters, from which data is extracted to curate a training dataset. Intelligent subsampling techniques, such as the principal of maximum entropy \cite{brewer2023entropy}, are used to curate an optimal training dataset. Hyperparameter optimization, such as DeepHyper \cite{balaprakash2018deephyper}, is used to perform neural architecture search (NAS) in order to design an optimal architecture. Model validation techniques, such as using PI3NN \cite{liu2021pi3nn} use prediction intervals to assess proper coverage of the training data (in-distribution vs. out-of-distribution) via uncertainty quantification. Finally, optimal deployment studies are performed to determine the optimal deployment parameters, such as concurrency, batch size, and precision \cite{brewer2021production}. The surrogate model may be deployed as a means of replacing a computationally expensive portion of the simulation, e.g., machine-learned turbulence model \cite{bhushan2021development}, or replace the entire simulation, e.g., FourCastNet climate model \cite{pathak2022fourcastnet}. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/surrogate-model-workflow.png}
+    \caption{Machine-learned surrogate model training and deployment workflow \cite{brewer2023entropy}.}
+    \label{fig:surrogate}
+\end{figure}
 
 {\bf Andrew Shao} TBD
 \TODO{Andrew: add your workflow work here}
