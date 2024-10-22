@@ -354,7 +354,7 @@ Second, we are outline some requirements that we found important as part of our 
 \section{Related Research}
 \label{sec:related}
 
-Due to the need for this special issue, it is impossible for a single paper to summarize all related research in this area. We refer to the other papers in this issue. Therefore, we restrict our summary of related and selected research to activities conducted by soem of the coauthors while not even being able to include all of the efforts conducted by them.
+Due to the need for this special issue, it is impossible for a single paper to summarize all related research in this area. We refer to the other papers in this issue. Therefore, we restrict our summary of related and selected research to activities conducted by some of the coauthors while not even being able to include all of the efforts conducted by them.
 
 {\bf von Laszewski} has worked in the area of scientific workflows for about 30 years. This includes the introduction of a novel metacomputing framework \citep{las-99-loosely,las-94-ecwmf,las-96-ecwmf} that was used to schedule jobs in a distributed fashion on multiple supercomputers and also access supercomputers of significant architectural design. 
 This was continued by the usage of workflows in problem solving environments \citep{las-01-pse}. This was followed by integrating many of the conceptual designs into the Globus Toolkit with the first application using workflows as part of Grids \citep{las-00-sbc}. The lesson from this motivated us to focus on developing the Java Commodity Grid Kit (Java CoG Kit) \citep{las-06-workcoordination,
@@ -402,22 +402,18 @@ workflows.
     \label{fig:surrogate}
 \end{figure}
 
-{\bf Andrew Shao} TBD
-\TODO{Andrew: add your workflow work here}
+{\bf Andrew Shao} studies the emerging workflow paradigms and philosophies needed to combine AI/ML techniques with HPC-scale scientific simulations as a lead developer of the open-source library SmartSim (detailed Section \ref{sec:smartsim}). In particular, most traditional numerical modelling operates as a pipeline with each stage focusing on the execution of a single application and the file system used to exchange data between stages. HPC simulation and AI applications often require a more service-oriented architecture with data exchange that occurs across loosely-coupled components (i.e. processing elements transfer data through an intermediary). The SmartSim library provides well-maintained, open-source tooling that enables domain scientists to describe and execute their own complex workflwows. 
 
-More deatils about SmartSim is provided in Section \ref{sec:smartsim}
+{\bf Christine Kirkpatrick} collaborates with workflow experts at several NSF and DOE-funded labs. Activities have included an invited keynote at The WORKS Workshop at the Supercomputing Conference in 2023, activities through GO FAIR US to extend the FAIR Principles for Workflows (in progress), and participation in other workshops. Her most recent scholarship includes a co-authored a section from a Dagstuhl seminar proceeding, ``Integrating HPC, AI, and Workflows for Scientific Data Analysis'' on sustainability in HPC and AI-driven scientific workflows \citep{badia2024integrating}.
 
-{\bf Christine Kirkpatrick} collaborates with workflow experts at several NSF and DOE-funded labs. Activities have included an invited keynote at The WORKS Workshop at the Supercomputing Conference in 2023, activities through GO FAIR US to extend the FAIR Principles for Workflows (in progress), and participation in other workshops. Her most recent scholarship includes a co-authored a section from a Dagstuhl seminar proceeding, "Integrating HPC, AI, and Workflows for Scientific Data Analysis" on sustainability in HPC and AI-driven scientific workflows\cite{badia2024integrating}.
-\TODO{Christine: add your workflow work here}
-
-To provide a better view of the various aspects to workflows we have organized them into a graph as shown in Figure \ref{F:graph-challanges}.
+To provide a better view of the various aspects of workflows we have organized them into a graph as shown in Figure \ref{F:graph-challanges}.
 
 
 
 
 \section{Workflow Requirements}
 
-In this section we make soem important observations that have a direct impact on or workflow requirements. We start with sn overview of hardware that has an immedite impact on our workflow strategy.
+In this section we make some important observations that have a direct impact on workflow requirements. We start with an overview of hardware that has an immedite impact on our workflow strategy.
 
 \subsection{Hardware Workflow requirements}\label{sec:hw-requirements}
 
@@ -439,7 +435,7 @@ An allocation request is typically needed to get access to such machines.
 \item {\bf Capacity Tier-3:} Smaller scale HPC funded by a university or entity
   that are no longer listed in the Top500 list. Many universities have their own small clusters that are not as powerful but serve their individual communities or even labs. They may or may not run batch systems and at times use other software such as OpenStack, or more recently Kubernetes. 
 \item {\bf Capacity Tier-4:} Privately owned machines supporting development
-  and debugging. These are machines operated by individual researchers that may include still powerful GPUs or CPUs often performing faster than even those offered by their own universities. They provide an excellent cost performance option for many researchers to develop and debug their programs quickly if the scale of the targeted application allows. These systems are obviously not targeting large parallel computing jobs.
+  and debugging. These are machines operated by individual researchers that may include powerful GPUs or CPUs, often performing faster than even those offered by their own universities. They provide an excellent cost-performance option for many researchers to develop and debug their programs quickly if the scale of the targeted application allows. These systems are obviously not targeting large parallel computing jobs.
   
 \end{itemize}
 
@@ -558,17 +554,37 @@ Windows Subsystem for Linux (WSL) can be used.
 \subsection{User Requirements}
 \label{sec:user-requirements}
 
-To identify the user requirements we have to first ask ourselfs who are the users. Throughout our rich experience we encounterd the following user groups:
+To identify the user requirements we have to first ask ourselves who are the users. Throughout our rich experience we encountered the following user groups:
 
 \begin{itemize}
-    \item {\bf Application users}
-    \item {\bf Application developers}
-    \item {\bf DevOps Engeneiers}
-    \item {\bf Cyberinfrastructure Engeneeries}
-    \item {\bf System Administrators}
-    \item {\bf Organization and Funding agencies}
+    \item {\bf Application users} are users with focus on application usage. Often they are supported by Graphical User Interfaces, Portals or even customized application specific frameworks. In many cases the complex workflows to utilize sophisticated cyberinfrastructure including hardware and software is hidden from the users. However this may come with the problem that such users may not adequately access what cost a particular workflow causes. Thus the support of such users not only needs to be user friendly but also project in easy to understand terms the expected runtime costs for experiments conducted with them. This may include not only the dollar cost but other factors such as availability, wait time, and energy costs.
+    \item {\bf Application Scripters} are users that may not have GUIs or portals available or even prefer to use scripts to formulate their experiments. This may include shell scripts, or programming languages such as Python to coordinate the experiments. The requirements for such users include that the scripting must be easy enough so that it does still allow the application to be the main focus of their work. In some cases the result of such scripts are templates that through reuse can accelerate the repeated execution of experiments. When using HPC systems users typically have to learn how to use the batch queuing system, as well have minimal understanding of the command shell. 
+    \item {\bf Application developers} are developing specialized applications as part of their scientific workflows. They either develop the workflows from scratch as part of the regular programming or reuse libraries that interface either with the application domain or the cyberinfrastructure so that through reuse the experiments they target can be simplified through sophisticated but easy to use APIs, libraries, experiment management workflow components that coordinate one or multiple experiments. It is important that the libraries that are developed for this community can be integrated in some fashion into the preferred programming language, or framework. This may go beyond the availability of Python frameworks that are very popular with AI experiments. 
+    \item {\bf DevOps Engineers} tasks include the management of a software development life cycle and enabling the integration of cyberinfrastructure to allow workflows that integrate automated provisioning, testing and release management. They can b e essential in the better utilization of the infrastructure in general but also support large scale experiments that are these days more common while utilizing large scale cyberinfrastructure. Experiment workflows thus need not only be able to be defined by application users for large scale HPC but it is advantageous to consult with DevOps Engineers to fine tune experiments before they are placed on the infrastructure or are refined throughout their lifetime. A whole set of tools have been developed in support of DevOps which we will not get into further as it deserves its own paper.
+    \item {\bf System Administrators and Support Staff} are supporting experiments while keeping up the systems designed for a user commmunity. They will provide support and help of any users utilizing their infrastructure. In many cases application users do not need or accesses DevOps Engineers but interface directly with the System Administrator to define strategies to utilize the infrastructure for their experiments. In all organizations we used HPC resources for experiments dedicated support was available to address questions on how to improve the runtime experiments as well as application performance improvements.
+    \item {\bf Organization and Funding agencies} are an often overlooked part of the scientific experiment workflow. They provide in many cases the access to the often costly infrastructure and need to be informed how they are used. This may include not only an overall breakdown for the entire organization, but it can also help he individual experimenter to understand their own demands placed on compute resources. 
 \end{itemize}
 
+From this diverse set of users that we encounter in support of experiments it is obvious that the requirements vary by user group. While for example the application user is satisfied with the most simplest interface an application developer and scientific researcher may need access to much more sophisticated tools and libraries. In many cases they could also benefit from a standardization of libraries that supports their and other researchers experiments even across domains. Education of the users may play a very important role. While we have seen in some projects users been educated by system staff, the users as well as the system staff may not have known tools that simplify certain processes in the experiment management workflow. For example, we did a test where a group of graduate and undergraduate students struggled over six month to develop a reproducible FAIR based experiment while just using batch scripts, while they could have chosen one of our workflow systems that specifically addresses this issue which a much more easy to use and powerful solution provided by the cloudmesh experiment executor or SmartSim. In case of the experiment executor we showed that the same experiment workflow set up by  the team of 4 students working on this for six month  could be executed by a single undergraduate student in a matter of a day. Not only that, the results produced were reproducible and scientifically sound as they were verified independently. 
+One of the most important lessons we obtained form it was that experiment workflows require a proper framework to be able to reproduce the experiment. This includes experiment parameters for the application and the infrastructure, as well as an easy to understand mechanism to record and catalogue data products created by not only one but potentially many thousands or hundred of thousand experiments. This is based on our own experience when an experiment needed to be repeated to identify issues with the data, or to conduct quality or performance improvements as part of benchmarking the experiments. This also includes the fact that such experiments must be designed in a portable fashion so they can be executed potentially on different infrastructure for performance and even accuracy comparisons (in case different architectures are used).
+
+
+\begin{BOX}[Implications from Section \ref{sec:user-requirements} user requirements]
+
+\begin{itemize}
+
+\item {\bf Wide Variety of Users:} {\it }
+\item {\bf Ease of Use:} {\it }
+\item {\bf Experiment Automation:} {\it 
+Replication}
+
+\item {\bf Experiment Reporting:} {\it }
+\item {\bf Portability:} {\it }
+\item {\bf Cost Considerations:} {\it }
+
+\end{itemize}
+    
+\end{BOX}
 
 \subsection{Software}
 \label{sec:sw-requirements}
@@ -929,15 +945,19 @@ We have practical experience from multiple teams where coders spent multiple mon
 
 \subsection{SmartSim}
 
-SmartSim in contrast to Cloudmesh follows a paradigm where the user describes the parameterization of a workflow and its components within a single python-based driver file. Within this driver file, the user instantiates `Model' and `Ensemble' objects that have three separate ways of modifying the behavior of the application
+SmartSim in contrast to Cloudmesh follows a paradigm where the user describes the parameterization of a workflow and its components within a single python-based driver file. The top-level ``Experiment'' object contains a variety of factory methods used to create representatives of workflow components as well as other methods used to launch and monitor tasks. These factory methods and other methods on the objects themselves have ways of modifying the behavior of the application using the following three mechanisms
 \begin{enumerate}
-    \item Configuration parameters in templated input files
-    \item Collections of input files
-    \item Runtime arguments passed to the executable
+    \item Specifying parameter values in templated input files
+    \item Defining different collections of input files
+    \item Modifying runtime arguments passed to the executable
 \end{enumerate}
-For the first two items, the run directories for the object are created during a `generation' step. The resulting
+When creating an Ensemble, the user can specify a number of strategies to explore a parameter space. The most granular strategy has the user manually add individually configured ``Model'' objects to the Ensemble object. SmartSim also provides a number of more automatic strategies to create the Ensemble. The first ``replicas'' uses the same set of parameters for $N$ ensemble members, useful for exploring applications which have inherent internal stochasticity. The ``step'' strategy specifies $N$ sets of parameter key value pairs creating $N$ ensemble models. The ``all_perm'' strategy calculates all permutations of the input parameter key value pairs. While SmartSim does not have the concept of a configuration file as a native concept, users have employed JSON, YAML, and the Hydra framework \cite{Hadan2019Hydra} to translate file-specified parameters to the SmartSim factory methods.
 
-While SmartSim does not have the concept of a configuration file as a native concept, users have employed JSON, YAML, and the Hydra framework \cite{Hadan2019Hydra}.
+The run directories for the object are created during a `generation' step. The resulting directory can then be inspected by the user or otherwise modified. The Experiment's ``start'' method interacts with the workload manager on the platform to actually execute that component of the workflow and allow SmartSim to monitor its status. Based on the user-specified workload manager, SmartSim will construct the appropriate run command (e.g. SLURM's srun) and/or batch file and command (e.g. PBS's qsub) and submit to the workload manager. The standard error and standard out for each wokrflow component are captured and stored as text files within each component's run directory.
+
+The dynamic configuration and execution of these workflow components allows SmartSim users to create workflows where the values of parameters are not known a priori. This is particularly important for workflows that are iterative in nature (see Section \ref{subsubsection:cyclic} for further detail).
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Applications}
@@ -973,7 +993,7 @@ PyTorch    & RedisAI     & SmartRedis      & RESP  \\ \hline
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Cyclic Execution }
+\subsubsection{Cyclic Execution} \label{subsubsection:cyclic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Workflow execution has typically focused on workflows that can be represented by a pipeline or more generally a directed acyclic graph (cycles with predefined loop limits can be unrolled). Many solutions exist to execute and monitor these types of workflows (e.g. Parsl or Maestro). In both these cases, the execution is deterministic.
@@ -981,7 +1001,6 @@ Workflow execution has typically focused on workflows that can be represented by
 Other types of workflows, becoming more popular in scientific applications, involve branches or criteria based loops, thus violating the fundamental assumptions of a DAG. One common application is automatic parameter estimation.  For example in \citep{Maric2024OpenFOAM}, a Bayesian optimizer is applied to an OpenFOAM computational fluid dynamics case. The optimizer at every iteration generates candidate parameter sets which are then used to launch new cases. The output form those cases are then ingested by the optimizer for the next iteration. As is typical of optimization problems, this cycle ends when either the loss function converges, stalls, or reaches a certain number of optimizations.
 
 Reinforcement learning is another type of workflow which involves non-cyclic and potentially branching workflow execution. In \citep{Font2024}, an ML model is used to control the behavior of a turbulent flow surrounding a rising bubble. The ML model is able to modify the flow by controlling actuators.  The RL model deploys multiple agents in the various environments to explore and refine the optimal actions. Similarly, \citep{Kurz2022} train a surrogate model of turbulence using an RL framework. The agent predicts an eddy viscosity where the RL model is incentivized to match the energy spectra in a turbulence-resolving model. As in \citep{Font24}, the scientific simulation is used as an environment to evaluate the agents' strategies. In both these cases, the need to continue to iterate and test requires dynamic configuration and execution where the number of cycles is not known a priori.
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

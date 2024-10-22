@@ -1,7 +1,7 @@
 
 \begin{figure}[p!]
   \centering
-  \resizebox{13cm}{!}{%
+  \resizebox{12.5cm}{!}{%
 \begin{forest}
 skan tree
    [Supporting Workflow Concepts
@@ -42,12 +42,14 @@ skan tree
         ]
         [Runtime Support
            [Automation]
-           [Monitoring \citep{cloudmesh-ee}]
+           [Monitoring \citep{cloudmesh-ee}
+              [XDMoD]
+           ]
            [Instrumentation \citep{cloudmesh-stopwatch,cloudmesh-gpu}]
            [Checkpointing \citep{las-2023-mlcommons-edu-eq}]
            [Benchmarking \citep{cloudmesh-ee}]
-           [Reproducability \citep{cloudmesh-ee}
-               [FAIR]
+           [Reproducibility \citep{cloudmesh-ee}
+               [cloudmesh FAIR suppport\citep{cloudmesh-ee}]
            ]
         ]
         [Resource Management
@@ -66,8 +68,11 @@ skan tree
         [Applications
             [AI
                [MLCommons]
-               [Surrogates]
+               [Surrogates \cite{brewer2021production}]
             ] 
+        ]
+        [Evaluation 
+           [Bibliography]
         ]
    ]
 ]
