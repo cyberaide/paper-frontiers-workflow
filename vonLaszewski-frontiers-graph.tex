@@ -1,7 +1,7 @@
 
 \begin{figure}[p!]
   \centering
-  \resizebox{0.6\textheight}{!}{%
+  \resizebox{13cm}{!}{%
 \begin{forest}
 skan tree
    [Supporting Workflow Concepts
@@ -27,7 +27,9 @@ skan tree
                 [ ... ]
              ]
            ]
-           [Scripting \citep{cloudmesh-ee}]
+           [Scripting \citep{cloudmesh-ee}
+              [Templating]
+           ]
            [API \citep{las-02-javacog,las-17-cloudmesh}
              [Python \citep{cloudmesh-ee}
              [Loop \citep{cloudmesh-ee}]
@@ -39,6 +41,7 @@ skan tree
            [Dataframe \citep{cylon,cylon-radical}]
         ]
         [Runtime Support
+           [Automation]
            [Monitoring \citep{cloudmesh-ee}]
            [Instrumentation \citep{cloudmesh-stopwatch,cloudmesh-gpu}]
            [Checkpointing \citep{las-2023-mlcommons-edu-eq}]
@@ -56,6 +59,15 @@ skan tree
             [Cost \citep{las-01-greed}]
             [Energy ]
           ]
+        ]
+        [Standardization 
+          [NIST]
+        ]
+        [Applications
+            [AI
+               [MLCommons]
+               [Surrogates]
+            ] 
         ]
    ]
 ]

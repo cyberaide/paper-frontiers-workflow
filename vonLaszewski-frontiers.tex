@@ -338,18 +338,21 @@ It is obvious from this that not only one experiment can be run, but that many d
 The tools we report on in this paper deal with this problem while coordinating experiment executions on one or multiple HPC compute machines.
 The reason why we use the term experiment execution instead of workflow is because the term workflow may be used differently by different communities. Some communities also provide solutions for example using direct acyclic graphs excluding iterations, while in our definition of experiment execution iterations are a must while we also can run DAGs if needed. 
 Due to the complexity of the infrastructure we found that we need to support a bottom-up approach as well as a top-down approach.
-Through the bottom-up approach we can use APIs, components and scripts that can be adapted by integrating new applications but leveraging the concept of multiple experiments run to obtain a consistent result reporting promoting the FAIR principle.
+Through the bottom-up approach we can use APIs, components and scripts that can be adapted by integrating new applications but leveraging the concept of multiple experiments run to obtain a consistent result reporting promoting Open Science and the FAIR principles.
 We also need to be able to support a top-down approach where we from the application users learn what features their benchmarks need to include and be able to utilize lower-level libraries to support them.
 
 We have independently developed such libraries and tools that support the bottom up and top down approach while projecting similar functionality thus giving us confidence that what we describe here has a general characteristic useful to many.
 The tools that we describe leading to this general concept are the Experiment Executor and Compute Coordinator which a distributed as part of the cloudmesh toolkit as a plugin. The other system is SmartSim which provides both a Python-based library used to describe the components of a workflow as well as allowing users to deploy an in-memory datastore which is also capable of performing AI inference. 
 
-The paper is structured as follows.
+The paper is structured as follows. First, we summarize relevant research done by the coauthors of this paper that address many issues related to workflows and are directly related to activities the authors have been involved with (Section \ref{sec:related}).
+Second, we are outline some requirements that we found important as part of our activities in the area motivated by hardware (Section \ref{sec:hw-requirements}), users (Section \ref{sec:user-requirements}), software (Section \ref{sec:sw-requirements}), and data management (Section \ref{sec:data-requirements}) requirements.
 
-<....> 
+\TODO{complete structure of paper}
+
 
 
 \section{Related Research}
+\label{sec:related}
 
 Due to the need for this special issue, it is impossible for a single paper to summarize all related research in this area. We refer to the other papers in this issue. Therefore, we restrict our summary of related and selected research to activities conducted by soem of the coauthors while not even being able to include all of the efforts conducted by them.
 
@@ -390,10 +393,7 @@ workflows.
 
 \input{vonLaszewski-frontiers-graph}
    
-{\bf Surrogate Model Workflows}
-% \TODO{Wes: add your workflow work here}
-
-Fig. \ref{fig:surrogate} provides a schematic of a typical machine-learned \textit{surrogate model} training and deployment workflow. Simulations are run on HPC using a variety of input parameters, from which data is extracted to curate a training dataset. Intelligent subsampling techniques, such as the principal of maximum entropy \cite{brewer2023entropy}, are used to curate an optimal training dataset. Hyperparameter optimization, such as DeepHyper \cite{balaprakash2018deephyper}, is used to perform neural architecture search (NAS) in order to design an optimal architecture. Model validation techniques, such as using PI3NN \cite{liu2021pi3nn} use prediction intervals to assess proper coverage of the training data (in-distribution vs. out-of-distribution) via uncertainty quantification. Finally, optimal deployment studies are performed to determine the optimal deployment parameters, such as concurrency, batch size, and precision \cite{brewer2021production}. The surrogate model may be deployed as a means of replacing a computationally expensive portion of the simulation, e.g., machine-learned turbulence model \cite{bhushan2021development}, or replace the entire simulation, e.g., FourCastNet climate model \cite{pathak2022fourcastnet}. 
+{\bf Brewer} has most recently focused on  {\bf Surrogate Model Workflows}. Figure \ref{fig:surrogate} provides a schematic of a typical machine-learned \textit{surrogate model} training and deployment workflow. Simulations are run on HPC using a variety of input parameters, from which data is extracted to curate a training dataset. Intelligent subsampling techniques, such as the principal of maximum entropy \cite{brewer2023entropy}, are used to curate an optimal training dataset. Hyperparameter optimization, such as DeepHyper \cite{balaprakash2018deephyper}, is used to perform neural architecture search (NAS) in order to design an optimal architecture. Model validation techniques, such as using PI3NN \cite{liu2021pi3nn} use prediction intervals to assess proper coverage of the training data (in-distribution vs. out-of-distribution) via uncertainty quantification. Finally, optimal deployment studies are performed to determine the optimal deployment parameters, such as concurrency, batch size, and precision \cite{brewer2021production}. The surrogate model may be deployed as a means of replacing a computationally expensive portion of the simulation, e.g., machine-learned turbulence model \cite{bhushan2021development}, or replace the entire simulation, e.g., FourCastNet climate model \cite{pathak2022fourcastnet}. 
 
 \begin{figure}
     \centering
@@ -405,7 +405,9 @@ Fig. \ref{fig:surrogate} provides a schematic of a typical machine-learned \text
 {\bf Andrew Shao} TBD
 \TODO{Andrew: add your workflow work here}
 
-{\bf Christine Kirkpatrik} TBD
+More deatils about SmartSim is provided in Section \ref{sec:smartsim}
+
+{\bf Christine Kirkpatrick} collaborates with workflow experts at several NSF and DOE-funded labs. Activities have included an invited keynote at The WORKS Workshop at the Supercomputing Conference in 2023, activities through GO FAIR US to extend the FAIR Principles for Workflows (in progress), and participation in other workshops. Her most recent scholarship includes a co-authored a section from a Dagstuhl seminar proceeding, "Integrating HPC, AI, and Workflows for Scientific Data Analysis" on sustainability in HPC and AI-driven scientific workflows\cite{badia2024integrating}.
 \TODO{Christine: add your workflow work here}
 
 To provide a better view of the various aspects to workflows we have organized them into a graph as shown in Figure \ref{F:graph-challanges}.
@@ -553,13 +555,30 @@ Windows Subsystem for Linux (WSL) can be used.
   \end{itemize}
 \end{BOX}
 
-\subsubsection{Summary of requirements}
+\subsection{User Requirements}
+\label{sec:user-requirements}
 
+To identify the user requirements we have to first ask ourselfs who are the users. Throughout our rich experience we encounterd the following user groups:
+
+\begin{itemize}
+    \item {\bf Application users}
+    \item {\bf Application developers}
+    \item {\bf DevOps Engeneiers}
+    \item {\bf Cyberinfrastructure Engeneeries}
+    \item {\bf System Administrators}
+    \item {\bf Organization and Funding agencies}
+\end{itemize}
 
 
 \subsection{Software}
+\label{sec:sw-requirements}
+
+
+
+
 
 \subsection{Data Management}
+\label{sec:data-requirements}
 
 
 \subsection{Summary of Workflow Related activities to support Scientific Computing}
@@ -630,7 +649,7 @@ submit results
 \textbf{\textit{FAIR}}
 When designing benchmarks, it is important to think of the results as experiment data, rather than just an answer to a performance question. Organizing data for later reuse also allows for later application of machine learning to uncover additional insights that can lead to further optimization, e.g., subtle performance gains related to specific software and hardware device combinations. The FAIR Principles provide a framework for aligning research outputs. FAIR is an acronym with 15 underlying principles that relate to Findability, Accessibility, Interoperability, and Reusability (FAIR)\citep{wilkinson2016fair}. More specifically, the FAIR Principles call for the use of well-described, standardized metadata, clear licensing and usage information, open or freely available protocols and methods for access, and the use of globally unique identifiers. The actual implementation of the FAIR Principles varies by domain, data architecture, and resources available to sustain data management practices and infrastructure \citep{jacobsen2020fair}.
 
-In the case of this work, several practices were identified that relate to making HPC benchmark results more FAIR\citep{kirkpatrick2024}. These include ensuring controlled vocabularies are used when describing system information. Where these are not available, it is preferable for the software, such as cloudmesh, to extract information from other sources, such as system configuration, libraries, or registry settings, especially over the use of free form text. Ideally globally, unique identifiers would be assigned to each benchmark output. Other implementations of FAIR can include writing provenance information about how the benchmark was created into the results file.
+In the case of this work, several practices were identified that relate to making HPC benchmark results more FAIR\citep{kirkpatrick2024}. These include ensuring controlled vocabularies are used when describing system information. Where these are not available, it is preferable for the software, such as cloudmesh, to extract information from other sources, such as system configuration, libraries, or registry settings, especially over the use of free form text. Ideally globally, unique identifiers would be assigned to each benchmark output. Other implementations of FAIR can include writing provenance information about how the benchmark was created into the results file. The FAIR Principles in this work are also exemplified in structured abstraction, e.g., use of YAML, the use of standardization, e.g., NIST standards, and (machine) accessibility via an API. 
 
 result templates
 
@@ -708,6 +727,7 @@ Most recently a shift in scientific computing has taken place that emphasizes th
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{SmartSim}
+\label{sec:smartsim}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 SmartSim is a Python-based, open-source library that allows users to describe and execute hybrid AI/ModSim workflows using an in-memory datastore to exchange data. It has a sibling library SmartRedis that provides C, C++, Fortran, and  Python clients for simulation and analysis codes to enable components to communicate with the datastore.
