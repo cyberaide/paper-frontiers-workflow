@@ -294,20 +294,11 @@ Town Center Four,
   \section{}
 
 
-  Over many decades High Performance Computing systems have been made available to the research community through research activities and recently made also available through commercially available cloud solutions. The use of such systems has traditionally been restrictive due to the high costs of computing resources as well as the complex software to offer them efficiently to the community. Over time we also saw the utilization of federated resources such as Grids, Clouds, and today's hyperscale data centers. Still despite the many software systems and frameworks in support of these resources the utilization of them has been a challenge, especially in the academic community educating the next generation of scientists. We also found that the use of benchmarks on various machines even if they are not federated plays a significant hurdle in advertising a compute resource capability to the community. While popular frameworks such as Gatways and on the other spectrum Jupyter notebooks promise the simplification of the use, It is still important that scientific benchmarks are available that outline how such machines can be best utilized. This is best done in the form of workflow templates for the scientific application that can then be adapted accordingly to other scientific applications.
+  Over many decades High Performance Computing systems have been made available to the research community through research activities and recently made also available through commercially available cloud solutions. The use of such systems has traditionally been restrictive due to the high costs of computing resources as well as the complex software to offer them efficiently to the community. Over time we also saw the utilization of federated resources such as Grids, Clouds, and today's hyperscale data centers. Still despite the many software systems and frameworks in support of these resources the utilization of them has been a challenge, especially in the academic community educating the next generation of scientists. We also found that using benchmarks on various machines even if they are not federated plays a significant hurdle in advertising a compute resource capability to the community. While popular frameworks such as Gatways and on the other spectrum Jupyter notebooks promise the simplification of the use, It is still important that scientific benchmarks are available that outline how such machines can be best utilized. This is best done in the form of workflow templates for the scientific application that can then be adapted accordingly to other scientific applications.
 
   Within this paper, we focus first on identifying some pervasive usage patterns that outline which workflow templates we have found most useful based on our experiences over many decades. Naturally, there are many other patterns available that may be addressed by other frameworks. However, we focus here on templates that have been common to us based on decades of use of HPC systems dating back to the early parallel computers.  We especially have learned from our experience with the MLCommons Science working group that these issues are of significance and addressing them through simple tools improves the readiness of the community. Hence they can be integrated into what we term \textit{benchmark carpentry}, which is one particular aspect of our workflow applications.
 
-We have independently verified our need while developing two different
-libraries that upon closer inspection provide a large amount of
-overlap in functionality. These systems are the Experiment Executor
-which is part of a larger bag of services distributed as part of
-cloudmesh that has been used for more than a decade, as well as
-SmartSim developed by Hewlett Packard which similarly addresses
-experiment management. The application has been tested on various
-scientific applications. In our earlier work, this was done on
-cloudmask and earthquake prediction. Most recent work also includes
-verification as part of Ocean modeling. Here we focus on the need to develop a surrogate for computational fluid dynamics.
+We have independently verified our need while developing two different libraries that upon closer inspection provide a large amount of overlap in functionality. These systems are the Experiment Executor which is part of a larger bag of services distributed as part of cloudmesh that has been used for more than a decade, as well as SmartSim developed by Hewlett Packard which similarly addresses experiment management. The application has been tested on various scientific applications. In our earlier work, this was done on cloudmask and earthquake prediction. Most recent work also includes verification as part of Ocean modeling. Here we focus on the need to develop a surrogate for computational fluid dynamics.
 
 
 \tiny \keyFont{ \section{Keywords:} deep learning, benchmarking, hyper
@@ -325,23 +316,23 @@ verification as part of Ocean modeling. Here we focus on the need to develop a s
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Benchmarks are useful for comparing the performance of computing resources and identifying them based on a single or a set of applications run on them. Application users can benefit from them while identifying benchmarks that are closely related to their applications in order to assess and potentially predict what is needed to run their applications. Typical benchmarks include measuring the performance of CPUs, GPUs Data storage, as well as energy consumption. While tackling the most challenging problems multiple compute resources as part of HPC are needed.  Here additional machine characteristics such as network performance. The shared nature of such resources poses another complication as shared multiuser resource scheduling while sharing the resources at runtime, or sharing the resources through scheduling systems introducing wait times makes predicting real-time performance very challenging. Hence in many systems a benchmark is run as a single user and the queue wait time is often ignored.
+Benchmarks are useful for comparing the performance of computing resources and identifying them based on a single or a set of applications run on them. Application users can benefit from them while identifying benchmarks that are closely related to their applications in order to assess and potentially predict what is needed to run their applications. Typical benchmarks include measuring the performance of CPUs, GPUs Data storage, as well as energy consumption. While tackling the most challenging problems multiple compute resources as part of HPC are needed.  Here additional machine characteristics such as network performance. The shared nature of such resources poses another complication as shared multi-user resource scheduling, while sharing the resources at runtime, or sharing the resources through scheduling systems introducing wait times, makes predicting real-time performance very challenging. Hence in many systems a benchmark is run as a single user and the queue wait time is often ignored.
 
 Common HPC benchmarks include Linpack performance published for the top 500 HPC machines in \citep{www-top500}. Recently also a benchmark using High-Performance Conjugate Gradient (HPCG) has been added to complement the Linpack benchmark so that an additional understanding of the machine's performance can be achieved \citep{www-top500} through a different application.  As operating such machines costs a lot of energy, the Energy consumption of watts per flop is reported in the Green500 benchmark\citep{green500}.
 
-As from such benchmarks, one can only derive the {\em potential} of an HPC machine, it is important for application users to develop their own benchmark experiments to estimate its usage based on the application's needs. These benchmarks are often run at smaller scales and introduce scaling factors based on theoretical assumptions to then predict the performance of larger problems. In some cases, the application user will find that the performance exceeds that of the default machine capabilities as a whole, or that scheduling policies are set up by default that need to either be changed by the center staff, or the application needs to be rewritten to fit within the constraints provided. We found that although the center staff is very helpful in changing the policies temporarily, it is often not an option as if introduced the impact on serving the larger communities is not provided due to an adverse scheduling policy for them. Therefore the benchmark in general will be providing the pathway for utilizing the parallel resources within these boundaries.
+As from such benchmarks, one can only derive the {\em potential} of an HPC machine, it is important for application users to develop their own benchmark experiments to estimate its usage based on the application's needs. These benchmarks are often run at smaller scales and introduce scaling factors based on theoretical assumptions to then predict the performance of larger problems. In some cases, the application user will find that the performance exceeds that of the default machine capabilities as a whole, or that scheduling policies are set up by default that need to either be changed by the center staff, or the application needs to be rewritten to fit within the constraints provided. We found that although the center staff is very helpful in changing the policies temporarily, it is often not an option as if introduced, the impact on serving the larger communities is not provided due to an adverse scheduling policy for them. Therefore the benchmark in general will be providing the pathway for utilizing the parallel resources within these boundaries.
 
 In addition, to the traditional HPC benchmarks, recently machine learning benchmarks have been introduced. MLCommons is a group that tries to make the use of machine learning easier while creating typical benchmarks for supercomputers. While raw performance is measured by most working groups in MLCommons measuring the performance of many well-known AI applications, the science working group also tries to identify the best algorithms or even data sets to obtain benchmarks based not only on performance but also on the accuracy of the problem solution.
 
 It is obvious from this that not only one experiment can be run, but that many different experiments with potentially different hyperparameters, or datasets are to be considered. Setting up such experiment workflows is often complex especially if they exceed the center policies of an experiment. Therefore, we need to be able to coordinate many experiments as part of a workflow to obtain the results.
 
 The tools we report on in this paper deal with this problem while coordinating experiment executions on one or multiple HPC compute machines.
-The reason why we use the term experiment execution instead of workflow is because the term workflow may be used differently by different communities. Some communities also provide solutions for example using direct acyclic graphs excluding iterations, while in our definition of experiment execution iterations are a must while we also can run DAGs if needed. 
-Due to the complexity of the infrastructure we found that we need to support a bottom-up approach as well as a top-down approach.
+The reason why we use the term experiment execution instead of workflow is because the term workflow may be used differently by different communities. Some communities also provide solutions, for example, using direct acyclic graphs excluding iterations, while in our definition of experiment execution iterations are a must while we can also run DAGs if needed. 
+Due to the complexity of the infrastructure, we found that we need to support a bottom-up approach as well as a top-down approach.
 Through the bottom-up approach we can use APIs, components and scripts that can be adapted by integrating new applications but leveraging the concept of multiple experiments run to obtain a consistent result reporting promoting Open Science and the FAIR principles.
 We also need to be able to support a top-down approach where we from the application users learn what features their benchmarks need to include and be able to utilize lower-level libraries to support them.
 
-We have independently developed such libraries and tools that support the bottom up and top down approach while projecting similar functionality thus giving us confidence that what we describe here has a general characteristic useful to many.
+We have independently developed such libraries and tools that support the bottom up and top down approach while projecting similar functionality thus giving us confidence that what we describe here has input a general characteristic useful to many.
 The tools that we describe leading to this general concept are the Experiment Executor and Compute Coordinator which a distributed as part of the cloudmesh toolkit as a plugin. The other system is SmartSim which provides both a Python-based library used to describe the components of a workflow as well as allowing users to deploy an in-memory datastore which is also capable of performing AI inference. 
 
 The paper is structured as follows. First, we summarize relevant research done by the coauthors of this paper that address many issues related to workflows and are directly related to activities the authors have been involved with (Section \ref{sec:related}).
@@ -368,17 +359,16 @@ las-03-gridcomputing,
 las-02-javacog,
 las-00-grande,
 las-01-cog-concurency}. 
-During the peak of Grid Computing over 100 demonstrations on the Supercomputing exhibition floor used the Java CoG kit. As part of these activities he pioneered a remote execution service InfoGramm 
+During the peak of Grid Computing over 100 demonstrations on the Supercomputing exhibition floor used the Java CoG kit. As part of these activities, he pioneered a remote execution service InfoGramm 
 \citep{las-02-infogram}
 that in addition to serving as a service returning information about remote resources also allowed the execution of programs and scripts executed remotely as part of Grids allowing workflows to utilize multiple Grid resources at the same time. Early systems such as GridAnt \citep{las-04-gridant} 
-did provide the ability to formulate Grid Workflows into frameworks familiar to Java developers. A much enhanced workflow framework system was introduced into the  Java CoG Kit Karajan \citep{las-06-workflow-book} that in addition to using DAGs also allowed the specification of iterations into the workflow to help in the analysis of advanced photon source images and other applications. Prior work to Karajan includes \citep{las-04-gridant,las-01-cog-concurency,las-96-ecwmf}. The availability of the loops allowed superior performance as the application specific demands could be integrated. Workflows could be specified through an API, but also through the integration of XML specification. The workflows could be dynamic and changed based on runtime conditions. Some of the ideas from this work were continued into the Swift framework in support of fast, reliable, loosely coupled parallel computation \citep{las--7-swift}. 
+did provide the ability to formulate Grid Workflows into frameworks familiar to Java developers. A much-enhanced workflow framework system was introduced into the  Java CoG Kit Karajan \citep{las-06-workflow-book} that in addition to using DAGs also allowed the specification of iterations into the workflow to help in the analysis of advanced photon source images and other applications. Prior work to Karajan includes \citep{las-04-gridant,las-01-cog-concurency,las-96-ecwmf}. The availability of the loops allowed superior performance as the application-specific demands could be integrated. Workflows could be specified through an API, but also through the integration of XML specification. The workflows could be dynamic and changed based on runtime conditions. Some of the ideas from this work were continued into the Swift framework in support of fast, reliable, loosely coupled parallel computation \citep{las--7-swift}. 
 As part of the CoG Kit von Laszewski and his colleagues also invented the first service controllable file transfer service with GUI to coordinate multiple file transfers. While this work was focused mostly on implementations doen in Java, a new development using mostly Python was started with the Cyberaide toolkit \citep{las-09-ccgrid} that later on was renamed to Cloudmesh. As the name indicates the emphasis here was the integration of cloud resources rather than the focus of utilizing and enhancing the Globus Toolkit services. However, it also included initially the integration with Globus that focused on file transfer 
 \citep{las-04-ftp-journal}
 \citep{las-03-ftp}.
 This tool could support many different cloud services from which some no longer exist such as Eucalyptus \cite{eucalyptus} and OpenCirrus \cite{opencirrus}. The services supported included execution services on AWS, Google, and Azure, OpenStack (KIT, and Chameleon Cloud). It also included data transfer services. The workflows emphasized here were not server to server services, but client to server services. E.g. one of the goals was to create workflows that let a scientific user develop workflows that can be controlled from their laptop in such a fashion that the workflows can be started and monitored from the Laptop, allowing also the shutdown of the laptop and restart and discovering its state from ongoing workflow executions. 
 The Cloudmesh toolkit \citep{las-17-cloudmesh} philosophy includes the distribution of a number of plugins into an extensible command line and command shell framework. While separating them into different packages extensions and different client needs can be fulfilled more easily because the user can select the needed plugins so that cloudmesh offers a highly customizable solution for the different users. Early plugins include compute and file transfer resource services for AWS, Azure, Google, and OpenStack. However, most recently we have focused on experiment management which we describe in more detail within this paper due to the advent of large scale HPC centers with the use of GPUs to increase computational capabilities. 
 Additionally, von Laszewski participated in the efforts of Cylon for data engineering that simplifies data engineering workflow tasks \citep{cylon,cylon-radical}. 
-
 
 Although we also worked on infrastructure provisioning for scientific
 workflows that include image management
@@ -392,19 +382,30 @@ valuable lessons in regards to integration of provisioning into
 workflows.
 
 \input{vonLaszewski-frontiers-graph}
-   
-{\bf Brewer} has most recently focused on  {\bf Surrogate Model Workflows}. Figure \ref{fig:surrogate} provides a schematic of a typical machine-learned \textit{surrogate model} training and deployment workflow. Simulations are run on HPC using a variety of input parameters, from which data is extracted to curate a training dataset. Intelligent subsampling techniques, such as the principal of maximum entropy \cite{brewer2023entropy}, are used to curate an optimal training dataset. Hyperparameter optimization, such as DeepHyper \cite{balaprakash2018deephyper}, is used to perform neural architecture search (NAS) in order to design an optimal architecture. Model validation techniques, such as using PI3NN \cite{liu2021pi3nn} use prediction intervals to assess proper coverage of the training data (in-distribution vs. out-of-distribution) via uncertainty quantification. Finally, optimal deployment studies are performed to determine the optimal deployment parameters, such as concurrency, batch size, and precision \cite{brewer2021production}. The surrogate model may be deployed as a means of replacing a computationally expensive portion of the simulation, e.g., machine-learned turbulence model \cite{bhushan2021development}, or replace the entire simulation, e.g., FourCastNet climate model \cite{pathak2022fourcastnet}. 
+
+
+{\bf Brewer} has most recently focused on  {\bf Surrogate Model Workflows}. Figure \ref{fig:surrogate} provides a schematic of a typical machine-learned \textit{surrogate model} training and deployment workflow. Simulations are run on HPC using a variety of input parameters, from which data is extracted to curate a training dataset. Intelligent subsampling techniques, such as the principal of maximum entropy \cite{brewer2023entropy}, are used to curate an optimal training dataset. Hyperparameter optimization, such as DeepHyper \cite{balaprakash2018deephyper} or DLEO \cite{martinez2018deep}, is used to perform neural architecture search (NAS) in order to design an optimal architecture. Model validation techniques, such as using PI3NN \cite{liu2021pi3nn} use prediction intervals to assess proper coverage of the training data (in-distribution vs. out-of-distribution) via uncertainty quantification. Finally, optimal deployment studies are performed to determine the optimal deployment parameters, such as concurrency, batch size, and precision \cite{brewer2021production}. The surrogate model may be deployed as a means of replacing a computationally expensive portion of the simulation, e.g., machine-learned turbulence model \cite{bhushan2021development}, or replace the entire simulation, e.g., FourCastNet climate model \cite{pathak2022fourcastnet}.
+
+Digital twins are a virtual replica of a physical asset, that mimics the behavior of the asset, and communicates in a bi-directional manner with its physical twin \cite{nas2023foundational}.   Brewer et al. \cite{brewer2024digital} has recently developed a digital twin framework for HPC, called ExaDigiT, which integrates five different levels of information: (1) 3D asset modeling and visualization using augmented reality (AR) or virtual reality (VR), (2) telemetry/sensor data streaming from the physical asset, (3) machine learned (ML) models to mimic behavior in a data-driven manner, (4) modeling and simulation to mimic behavior based on first principles, and (5) reinforcement learning. Telemetry data is used for training AI/ML models and validating modeling and simulation. Modeling and simulation are used as a training environment for training a reinforcement learning agent, which provides autonomous control and optimization in the form of a feedback agent to the physical asset. This framework has been used to develop a digital twin of the Frontier supercomputer, the first Exascale supercomputer. Such a twin can be used for performing what-if scenarios (e.g., what-if a pump fails), system optimizations (e.g., power and cooling), and virtual prototyping of future systems. Several different instantiations of data center digital twins are reviewed in \cite{athavale2024digital}. A benchmark has yet to be developed for such a complex workflow, but we plan to work on this in the future. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{images/surrogate-model-workflow.png}
+    \includegraphics[width=0.8\linewidth]{images/workflow-surrogate-model.png}
     \caption{Machine-learned surrogate model training and deployment workflow \cite{brewer2023entropy}.}
     \label{fig:surrogate}
 \end{figure}
 
-{\bf Andrew Shao} studies the emerging workflow paradigms and philosophies needed to combine AI/ML techniques with HPC-scale scientific simulations as a lead developer of the open-source library SmartSim (detailed Section \ref{sec:smartsim}). In particular, most traditional numerical modelling operates as a pipeline with each stage focusing on the execution of a single application and the file system used to exchange data between stages. HPC simulation and AI applications often require a more service-oriented architecture with data exchange that occurs across loosely-coupled components (i.e. processing elements transfer data through an intermediary). The SmartSim library provides well-maintained, open-source tooling that enables domain scientists to describe and execute their own complex workflwows. 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/workflow-digital-twin.png}
+    \caption{Digital twin workflow \cite{brewer2024digital}.}
+    \label{fig:dt}
+\end{figure}
 
-{\bf Christine Kirkpatrick} collaborates with workflow experts at several NSF and DOE-funded labs. Activities have included an invited keynote at The WORKS Workshop at the Supercomputing Conference in 2023, activities through GO FAIR US to extend the FAIR Principles for Workflows (in progress), and participation in other workshops. Her most recent scholarship includes a co-authored a section from a Dagstuhl seminar proceeding, ``Integrating HPC, AI, and Workflows for Scientific Data Analysis'' on sustainability in HPC and AI-driven scientific workflows \citep{badia2024integrating}.
+
+{\bf Shao} approaches workflow management from both the point of view as a domain scientist (with a particular emphasis on climate modelling) and a computer scientist investigating the emerging workflow paradigms and philosophies needed to combine AI/ML techniques with HPC-scale scientific simulations. In particular, most traditional numerical modelling operates as a pipeline with each stage focusing on the execution of a single application and the file system used to exchange data between stages. Ensemble-based modelling (often used in climate/weather) represent a horizontally scaled pipeline- each individual member ensembles may differ by the values of their tunable parameters and/or the initial/boundary conditions, but run independently of each other. HPC simulation and AI applications often require a more service-oriented architecture with data exchange that occurs across loosely-coupled components (i.e. processing elements transfer data through an intermediary). The SmartSim library provides well-maintained, open-source tooling that enables domain scientists to describe and execute their own complex workflwows.
+
+{\bf Kirkpatrick} collaborates with workflow experts at several NSF and DOE-funded labs. Activities have included an invited keynote at a recent international workflows workshop, activities through GO FAIR US to promote the extension of the FAIR Principles for Workflows, and participation in other workshops \cite{kirkpatrick2023}. Her most recent scholarship includes a co-authored a section from a Dagstuhl seminar proceeding, ``Integrating HPC, AI, and Workflows for Scientific Data Analysis'' on sustainability in HPC and AI-driven scientific workflows \citep{badia2024integrating}.
 
 To provide a better view of the various aspects of workflows we have organized them into a graph as shown in Figure \ref{F:graph-challanges}.
 
@@ -413,21 +414,21 @@ To provide a better view of the various aspects of workflows we have organized t
 
 \section{Workflow Requirements}
 
-In this section we make some important observations that have a direct impact on workflow requirements. We start with an overview of hardware that has an immedite impact on our workflow strategy.
+In this section we make some important observations that have a direct impact on workflow requirements particularly in the context of scientific computing done at national laboratories and academia. These are largely distinguished from commercial workflows by the fundamental requirement to share results externally. Additionally, a strong trend towards open science and scientific reproducibility has also led to a push towards making the tools (e.g. simulation code, execution scripts, etc.) open as well.  
 
 \subsection{Hardware Workflow requirements}\label{sec:hw-requirements}
 
-In the US the HPC flagship computing resources have traditionally been offered by national scale computing centers most notably the Department of Energy and the National Science Foundation have funded such resources. In addition, we see NASA, NOAA, and others augmenting such offers for specialized mission and scientific objective efforts serving particular communities. Others such as the DoD related facilities are not available in general to the open science communities without restrictions, hence, we exclude them from our discussion. Other resources include commercial computing resources offered for example through cloud
+In the US the HPC flagship computing resources have traditionally been offered by national scale computing centers, most notably the Department of Energy and the National Science Foundation have funded such resources. In addition, we see NASA, NOAA, and others augmenting such offers for specialized mission and scientific objective efforts serving particular communities. Others such as the DoD related facilities are not available in general to the open science communities without restrictions, hence, we exclude them from our discussion. Other resources include commercial computing resources offered for example through cloud
 providers as part of hyper-scale computing centers.
 
-Beyond these systems, we see additional regional or topical shared resources of medium scale, but also smaller scale systems that are available for example in many universities to allow direct access to HPC resources. Such tiered levels of HPC resources are necessary to serve the various communities that distinguish themselves as part of their computational needs based on topic and scale. These smaller systems also serve as an important on-ramp for training in preparation for accessing the leadership class or larger systems.  Due to this tiered approach, the European Union has defined three tiers as part of the Partnership for Advanced Computing in Europe (PRACE) \cite{www-prace,prace-fact} as follows {\bf Tier-0:} European centers with petaflop machines, {\bf Tier-1:} National centres, and {\bf Tier-2:} Regional centers.
+Beyond these systems, we see additional regional or topical shared resources of medium scale, but also smaller scale systems that are available, for example, in many universities to allow direct access to HPC resources. Such tiered levels of HPC resources are necessary to serve the various communities that distinguish themselves as part of their computational needs based on topic and scale. These smaller systems also serve as an important on-ramp for training in preparation for accessing the leadership class or larger systems.  Due to this tiered approach, the European Union has defined three tiers as part of the Partnership for Advanced Computing in Europe (PRACE) \cite{www-prace,prace-fact} as follows {\bf Tier-0:} European centers with petaflop machines, {\bf Tier-1:} National centres, and {\bf Tier-2:} Regional centers.
   
-However, when classifying the US resources we have used as part of our scientific and benchmark-oriented workflow activities, we suggest the use of  a five-tiered model that classifies resources mostly by capacity:
+However, when classifying the US resources we have used as part of our scientific and benchmark-oriented workflow activities, we suggest the use of a five-tiered model that classifies resources mostly by capacity:
 
 \begin{itemize}
 \item {\bf Capacity Tier-0:} Leadership Class machines with worldwide leading
-  performance (Listed at the top of the Top-500 list). Such machines also include large specialized data file systems to allow serving the many computational nodes. Recently, such systems include a large number of GPUs. They are typically served by batch queuing systems and serve the most challenging scientific applications. An allocation request is typically needed to get access to such machines.
-\item {\bf Capacity Tier-1:} Machines in the upper portion of the Top-500 List which may be part of   National centers, Regional Centers, or Universities. Such systems are similar to the ones in Tier-0 but of significantly lower capabilities.
+  performance (Listed at the top of the Top 500 list). Such machines also include large specialized data file systems to allow serving the many computational nodes. Recently, such systems include a large number of GPUs. They are typically served by batch queuing systems and serve the most challenging scientific applications. An allocation request is typically needed to get access to such machines.
+\item {\bf Capacity Tier-1:} Machines in the upper portion of the Top-500 list which may be part of National centers, Regional Centers, or Universities. Such systems are similar to those in Tier-0 but of significantly lower capabilities.
 An allocation request is typically needed to get access to such machines.
 \item {\bf Capacity Tier-2:} Machines whose performance is similar to machines
   in the rest of the Top 500 list. These machines are either smaller systems or if still operated older HPC machines that have been replaced by newer machines.
@@ -435,7 +436,7 @@ An allocation request is typically needed to get access to such machines.
 \item {\bf Capacity Tier-3:} Smaller scale HPC funded by a university or entity
   that are no longer listed in the Top500 list. Many universities have their own small clusters that are not as powerful but serve their individual communities or even labs. They may or may not run batch systems and at times use other software such as OpenStack, or more recently Kubernetes. 
 \item {\bf Capacity Tier-4:} Privately owned machines supporting development
-  and debugging. These are machines operated by individual researchers that may include powerful GPUs or CPUs, often performing faster than even those offered by their own universities. They provide an excellent cost-performance option for many researchers to develop and debug their programs quickly if the scale of the targeted application allows. These systems are obviously not targeting large parallel computing jobs.
+  and debugging. These are machines operated by individual researchers that may include powerful GPUs or CPUs, often performing faster than even those offered by their own universities. They provide an excellent cost-performance option for many researchers to develop and debug their programs quickly if the scale of the targeted application allows. These systems obviously are not targeting large parallel computing jobs. Although these machines do not typically represent an HPC machine as they are mostly single node  computers they can provide valuable input in performance expectations, development, and debugging.\footnote{See Section \ref{sec:data-requirements})
   
 \end{itemize}
 
@@ -449,6 +450,9 @@ In general, all resources are accessible through remote access and is it well es
 
 To simplify access to several of them, we have developed additional libraries as part of cloudmesh in
 support of the newer technologies going beyond the use of SSH. This includes the introduction of a split-VPN library and toolkit that allows accessing multiple VPNs dependent on which resource is being used and through which VPN this resource is being secured. Problematic in this case can however be if, for example, a university has decided not to universally support split VPN.
+
+Alternatively, the Superfacility API \citep{Enders2020} proposes an externally accessible API (with authentication) that allows users to perform basic workflow tasks. With the correct requests, users can interact with the workload manager, upload/download files, and run shell commands. The primary downside to this approach is that it requires  owners of the HPC platform to deploy and support this API.
+
 
 \begin{figure}[htb]
     \centering
@@ -501,52 +505,50 @@ Windows Subsystem for Linux (WSL) can be used.
     \fi
 }
 
-
 \begin{BOX}[Implications from Section \ref{sec:hw-requirements} Hardware requirements]
 
 \begin{itemize}
 \item {\bf Hardware at scale:} {\it The hardware that we need to
-    support includes a wide range including the larges HPC systems
-    till down to the individual researchers computer.}
+    support includes a wide range of large HPC systems down to the individual researcher's computer.}
 \item {\bf Interface to workload managers:} {\it As different systems
     have different workload managers such as SLURM, LSF, SSH, and
     others the workflow system must be expandable and allow easy
     integration of workload managers by the community.}  
 \item {\bf Minimal support for access:} {\it Although it is not
     necessary to support a fully federated resource infrastructure,
-    client based workflows must support the integration of
-    heterogenous resources with potentially different workload
+    client-based workflows must support the integration of
+    heterogeneous resources with potentially different workload
     managers. Access could be supported through multiple keys or
-    services that are specifically set upi by the user to allow
-    interfaceing with the hardware.}
+    services that are specifically set up by the user to allow
+    interfacing with the hardware.}
 \item {\bf Minimal support for virtualization:} {\it Although we
-    previously spend a lot of tim interfaceing with virtualized
-    resources and cloud based resources, we recently have shifted our
-    focus on the more traditional pproach to interface with workflow
-    managers. This is motivated by the fact that many state of the
-    most complex state of the art projects are conducted on the most
-    cap[able macjhines (the first 7 machines in the Top500 provide the
-    same compute power as oll the rest of the 500).}
+    previously spend a lot of time interfacing with virtualized
+    resources and cloud-based resources, we recently have shifted our
+    focus on the more traditional approach to interface with workflow
+    managers. This is motivated by the fact that many of the
+    most complex state-of-the-art projects are conducted on the most
+    cap[able machines (the first 7 machines in the Top500 provide the
+    same compute power as all the rest of the 500).}
 \item {\bf Batch access and direct access:} {\it As many of the
     workload managers are batch queuing systems we need to support
-    them in general. However as we also have access to machines that
-    may not be controlled by batch queueues, we need to be able to
-    potentially simulate such batch queues, or provide mechnisms to
+    them in general. However, as we also have access to machines that
+    may not be controlled by batch queues, we need to be able to
+    potentially simulate such batch queues, or provide mechanisms to
     install them so that such resources can simulate the same
     interfaces as those provided by HPC centers.}
  \item {\bf Cloud HPC resources:} {\it Most recently several cloud
      vendors are also supporting the provisioning of HPC resources,
-     but the complexity to manage them is beyond those present by the
+     but the complexity of managing them is beyond those present by the
      typical application users. Workflow systems should support to
      more easily provision such HPC resources so they can be readily
-     integrated in the scientific reserach and benchmark efforts.}
+     integrated into the scientific research and benchmark efforts.}
  \item {\bf Container and virtual machine support:} {\it Obviously we
      have learned that the use of virtual machines in clouds can be of
      benefit to create portable workflows utilizing the. The same is
      valid for containers. Thus a potent workflow system ought to
-     support both virtual machines and containers. IN case of
-     containers this included docker, with kubernetes and apptainer as
-     they are dominant on HPC machines due to security aspects
+     support both virtual machines and containers. In case of
+     containers this included docker, with Kubernetes and especially Apptainer as the later
+     dominates virtualization activities on HPC machines due to heightened security aspects
      isolating the runtime environment. }
   \end{itemize}
 \end{BOX}
@@ -557,15 +559,15 @@ Windows Subsystem for Linux (WSL) can be used.
 To identify the user requirements we have to first ask ourselves who are the users. Throughout our rich experience we encountered the following user groups:
 
 \begin{itemize}
-    \item {\bf Application users} are users with focus on application usage. Often they are supported by Graphical User Interfaces, Portals or even customized application specific frameworks. In many cases the complex workflows to utilize sophisticated cyberinfrastructure including hardware and software is hidden from the users. However this may come with the problem that such users may not adequately access what cost a particular workflow causes. Thus the support of such users not only needs to be user friendly but also project in easy to understand terms the expected runtime costs for experiments conducted with them. This may include not only the dollar cost but other factors such as availability, wait time, and energy costs.
-    \item {\bf Application Scripters} are users that may not have GUIs or portals available or even prefer to use scripts to formulate their experiments. This may include shell scripts, or programming languages such as Python to coordinate the experiments. The requirements for such users include that the scripting must be easy enough so that it does still allow the application to be the main focus of their work. In some cases the result of such scripts are templates that through reuse can accelerate the repeated execution of experiments. When using HPC systems users typically have to learn how to use the batch queuing system, as well have minimal understanding of the command shell. 
+    \item {\bf Application users} are users with focus on application usage. Often they are supported by Graphical User Interfaces, Portals or even customized application-specific frameworks. In many cases the complex workflows to utilize sophisticated cyberinfrastructure including hardware and software is hidden from the users. However, this may come with the problem that such users may not adequately access what cost a particular workflow causes. Thus the support of such users not only needs to be user friendly but also project in easy-to-understand terms the expected runtime costs for experiments conducted with them. This may include not only the dollar cost but other factors such as availability, wait time, and energy costs.
+    \item {\bf Application Scripters} are users that may not have GUIs or portals available or even prefer to use scripts to formulate their experiments. This may include shell scripts, or programming languages such as Python to coordinate the experiments. The requirements for such users include that the scripting must be easy enough so that it still allows the application to be the main focus of their work. In some cases, the result of such scripts are templates that through reuse can accelerate the repeated execution of experiments. When using HPC systems users typically have to learn how to use the batch queuing system, as well as have minimal understanding of the command shell. 
     \item {\bf Application developers} are developing specialized applications as part of their scientific workflows. They either develop the workflows from scratch as part of the regular programming or reuse libraries that interface either with the application domain or the cyberinfrastructure so that through reuse the experiments they target can be simplified through sophisticated but easy to use APIs, libraries, experiment management workflow components that coordinate one or multiple experiments. It is important that the libraries that are developed for this community can be integrated in some fashion into the preferred programming language, or framework. This may go beyond the availability of Python frameworks that are very popular with AI experiments. 
     \item {\bf DevOps Engineers} tasks include the management of a software development life cycle and enabling the integration of cyberinfrastructure to allow workflows that integrate automated provisioning, testing and release management. They can b e essential in the better utilization of the infrastructure in general but also support large scale experiments that are these days more common while utilizing large scale cyberinfrastructure. Experiment workflows thus need not only be able to be defined by application users for large scale HPC but it is advantageous to consult with DevOps Engineers to fine tune experiments before they are placed on the infrastructure or are refined throughout their lifetime. A whole set of tools have been developed in support of DevOps which we will not get into further as it deserves its own paper.
-    \item {\bf System Administrators and Support Staff} are supporting experiments while keeping up the systems designed for a user commmunity. They will provide support and help of any users utilizing their infrastructure. In many cases application users do not need or accesses DevOps Engineers but interface directly with the System Administrator to define strategies to utilize the infrastructure for their experiments. In all organizations we used HPC resources for experiments dedicated support was available to address questions on how to improve the runtime experiments as well as application performance improvements.
-    \item {\bf Organization and Funding agencies} are an often overlooked part of the scientific experiment workflow. They provide in many cases the access to the often costly infrastructure and need to be informed how they are used. This may include not only an overall breakdown for the entire organization, but it can also help he individual experimenter to understand their own demands placed on compute resources. 
+    \item {\bf System Administrators and Support Staff} are supporting experiments while keeping up the systems designed for a user community. They will provide support and help of any users utilizing their infrastructure. In many cases, application users do not need or access DevOps Engineers but interface directly with the System Administrator to define strategies to utilize the infrastructure for their experiments. In all organizations we used HPC resources for experiments dedicated support was available to address questions on how to improve the runtime experiments as well as application performance improvements.
+    \item {\bf Organization and Funding agencies} are an often overlooked part of the scientific experiment workflow. They provide in many cases access to the often costly infrastructure and need to be informed how they are used. This may include not only an overall breakdown for the entire organization, but it can also help he individual experimenter to understand their own demands placed on computing resources. 
 \end{itemize}
 
-From this diverse set of users that we encounter in support of experiments it is obvious that the requirements vary by user group. While for example the application user is satisfied with the most simplest interface an application developer and scientific researcher may need access to much more sophisticated tools and libraries. In many cases they could also benefit from a standardization of libraries that supports their and other researchers experiments even across domains. Education of the users may play a very important role. While we have seen in some projects users been educated by system staff, the users as well as the system staff may not have known tools that simplify certain processes in the experiment management workflow. For example, we did a test where a group of graduate and undergraduate students struggled over six month to develop a reproducible FAIR based experiment while just using batch scripts, while they could have chosen one of our workflow systems that specifically addresses this issue which a much more easy to use and powerful solution provided by the cloudmesh experiment executor or SmartSim. In case of the experiment executor we showed that the same experiment workflow set up by  the team of 4 students working on this for six month  could be executed by a single undergraduate student in a matter of a day. Not only that, the results produced were reproducible and scientifically sound as they were verified independently. 
+From this diverse set of users that we encounter in support of experiments, it is obvious that the requirements vary by user group. While for example, the application user is satisfied with the most simplest interface an application developer and scientific researcher may need access to much more sophisticated tools and libraries. In many cases, they could also benefit from a standardization of libraries that supports their and other researchers experiments even across domains. The education of the users may play a very important role. While we have seen in some projects users have been educated by system staff, the users as well as the system staff may not have known tools that simplify certain processes in the experiment management workflow. For example, we did a test where a group of graduate and undergraduate students struggled over six months to develop a reproducible FAIR-based experiment while just using batch scripts, while they could have chosen one of our workflow systems that specifically addresses this issue which a much more easy to use and powerful solution provided by the cloudmesh experiment executor or SmartSim. In case of the experiment executor, we showed that the same experiment workflow set up by the team of 4 students working on this for six month could be executed by a single undergraduate student in a matter of a day. Not only that, the results produced were reproducible and scientifically sound as they were verified independently. 
 One of the most important lessons we obtained form it was that experiment workflows require a proper framework to be able to reproduce the experiment. This includes experiment parameters for the application and the infrastructure, as well as an easy to understand mechanism to record and catalogue data products created by not only one but potentially many thousands or hundred of thousand experiments. This is based on our own experience when an experiment needed to be repeated to identify issues with the data, or to conduct quality or performance improvements as part of benchmarking the experiments. This also includes the fact that such experiments must be designed in a portable fashion so they can be executed potentially on different infrastructure for performance and even accuracy comparisons (in case different architectures are used).
 
 
@@ -573,31 +575,41 @@ One of the most important lessons we obtained form it was that experiment workfl
 
 \begin{itemize}
 
-\item {\bf Wide Variety of Users:} {\it }
-\item {\bf Ease of Use:} {\it }
-\item {\bf Experiment Automation:} {\it 
-Replication}
-
-\item {\bf Experiment Reporting:} {\it }
-\item {\bf Portability:} {\it }
-\item {\bf Cost Considerations:} {\it }
+\item {\bf Wide Variety of Users:} {\it To support the wide variety of users experiment management needs to be available from the lowest to the highest level of interfaces targeting the specifics for the user community. This has significant impact on the software in support for these communities which we explain in the next section.}
+\item {\bf Ease of Use:} {\it In order for the user community to utilize experiment management it is important that whatever tool and software is supported it can easily be used by the targeted user community.}
+\item {\bf Experiment Automation:} {\it Users strive for replication of their experiments. This includes experiments that can be replicated by different users, but also experiments that can be replicated on different hardware.}
+\item {\bf Experiment Reporting:} {\it As experiments are recorded at a particular time under a selection of software and hardware utilization, it is important that results encompass reporting of the environment. This will help reproducibility of the experiment and if the underlying system has changed the repetition of the experiments with minimal changes.}
+\item {\bf Portability:} {\it Users that conduct benchmark experiments also require portability which allows to compare and contrast different experiment setups on different systems.}
+\item {\bf Cost Considerations:} {\it One important factor in conducting benchmark experiment workflows is the ability to understand cost considerations prior to running a large scale or time consuming experiment. Having the ability to scale and predict performances from a small scale to the target scale is an important need. Tools and software should be provided that assist in this often complex endeavor.}
 
 \end{itemize}
     
 \end{BOX}
 
-\subsection{Software}
+\subsection{Software Requirements}
 \label{sec:sw-requirements}
 
+In Figure \ref{F:graph-challanges} we have already listed many of the topics that influence the software design and requirements. Due to the diverse user community a one fits all solution can not be applied and the solution must be addressing in particular the specific user communities.
+
+For this reason we distinguish important abstractions to formulate experiment workflows. This includes in particular arrays and loops of experiments iterating over hyperparameters or specific machine configurations to be provisioned or used. 
+Although DAGs allow us to coordinate experiments also, we found that in many cases where iterations are called for equivalent specifications can be more easily formulated with loops and arrays. This insight was already available in our earlier work where we allowed iterations and dynamically changing workflow graphs \citep{las07-workflow}. The functionality ought to be exposed on various levels. This includes availability in the queuing system (which many of them provide), the availability as API to integrate in convenient fashion functionality into frameworks or even programming languages, or providing high-level abstractions such as YAML formulations that allow the definition of iterations or DAGs in easy fashion within easy to understand formulations. The latter is a reformulation of our earliest work that included specifications on a higher level in specialized formats \citep{las-96-ecwmf}  or XML \citep{las07-workflow}, but are now done for example by using YAML and JSON replacing template to formulate high-level templates to start experiments \citep{cloudmesh-cc,cloudmask-ee}.
+
+Through the availability of low level and high-level functionality that is exposed through APIs and a convention based on for example an enhanced experiment workflow description leveraging YAML, the functionality can through software engineering incorporated in any framework or application. 
+
+As we specifically target the combination of hyperparameter (or just parameters when not using AI) as well as introducing parameterized infrastructure we truly address experiment management through the combination of all these factors.
+
+This allows the the support of the experiment workflow including data pre-staging, computational calculations
+checkpointing/restoring, result recording, and backup.
+
+Through the availability of these functionalities on various abstraction levels while leveraging the same backbends we are able to flexibly integrate the appropriate solution in the various levels without necessarily having to address or repeat them throughout the software stack. One way of dealing with integration into other frameworks is to provide interfaces for example in OpenAPI. This will allow in many cases a sufficiently detailed integration in other languages also through the wide support of OpenAPI. However, due to the dominant use of Python in academia as part of newer developments, we promote the use of a native Python API. for our work. This has the advantage that many build-in libraries and tools can be leveraged to simplify the development of integrated workflows. Obviously we also can leverage the language support for loops and existing libraries to support graphs which we have demonstrated successfully in \citep{cloudmesh-cc}.
+
+\section{Runtime Requirements}
+
+Besides typical runtime requirements such as speed and access to the available hardware through APIs, we especially note that often we need to address policy-based restrictions to the resources. This for example includes addressing queueing system policy restrictions set up by the organization and managed by the administrators. Although such restrictions could be changed, they are often not scalable as they need to be changed back. However, in many cases reformulating the experiment workflow can overcome such restrictions. For example, a job that is terminated due to exceeding time restrictions could be split in multiple jobs while allowing checkpointing at the end of the individual jobs and restarting them into the next phase can help. In other cases instead of creating a loop over all possible calculations needed to conduct the overall experiment, submitting multiple jobs with the experiments split up between them can be used. While assuring that the results are being stored in a coordinated fashion following the FAIR principle the analysis of the final result while combining the results of the many individual experiments can be split up and if often preferred as for example such experiment management can even deal with outages of the resources. Another example is where a resource allows the utilization of thousands of CPUs or GPUS, but only for a small amount of time. In such cases, the application user ought to be encouraged to parallelize their algorithms and the experiment framework needs to support such a modality. This, however, is outside of the scope of our work and needs to be addressed by the application developers. Small-scale runtime experiments could be used to project how the runtime or the design of an algorithm is impacted by such queueing policies.
+Furthermore, we note that such policies differ widely between HPC systems and need to be integrated into the planning of a heterogeneous experiment across resources. Obviously, the availability of time and space limits at runtime that could be queried dynamically can help improve the deployment of dynamic experiments that deal with the limits if they arise. Guidelines and APIs to checkpoint an application will be of importance. However, although automatic checkpointing is desired, for many applications only a fraction of data is needed and not the entire state of the running application. Therefore it is best to identify data that is needed in consecutive runs and only checkpoint those.
 
 
-
-
-\subsection{Data Management}
-\label{sec:data-requirements}
-
-
-\subsection{Summary of Workflow Related activities to support Scientific Computing}
+\section{Security Requirements}
 
 Workflows to coordinate work on heterogeneous computing resources
 
@@ -605,56 +617,23 @@ Federated security to support heterogeneous computing resources
 
 Experiment Management
 
-Addressing  Queue policy restrictions
+containers
 
-Addressing efficient queue utilization
-
-Addressing scientific application work coordination
-    data prestaging
-    computational calculations
-    checkpointing/restoring
-    result recording
-    backup
-
-Programming support for scientific workflows
-    DaGs
-    loops
-    programming
-    YAML
-    
-Provisioning of resources in support of scientific workflows
-    virtual machines
-    containers
-    clouds
-
-Dataframeworks supporting scientific workflows
-
-Abstractions
-
-Formulation
+clouds
 
 
+\subsection{Data Management Requirements}
+\label{sec:data-requirements}
 
-%\begin{figure}[htb]
-%  \centering
-%    \includegraphics[width=0.70\columnwidth]{images/concepts}
-%    \caption{Concepts.}
-%    \label{fig:concepts}
-% \end{figure}
+In order to support data benchmark requirements we need to consider the wide variety of data needs served by the benchmarks. This includes statically generated data which may not involve any data storage, and reaches to hundreds of petabytes for the training of for example large language models. As the full training as part of a benchmark is out of scope for the benchmark initiative, smaller data sets are used. 
+We see in other cases the uses of a few files, but in other cases a plethora of files incorporated into an application benchmark. The inclusion of such data can reveal shortcomings of the hardware design, leading to potential issues that despite the availability of modern CPUs and GPUs the file system is not designed to leverage them efficiently as the workflow to utilize them can not keep them busy and the data management becomes a bottleneck. We have shown recently that at a university cluster this was the case. Thus benchmarks should not only project the potential of the sheer computational power of a system, but also integrate the data I/O performance.
 
+\TODO{this is duplicated in tier section}
 
 
 
 
 \section{HPC Benchmark  Experiment Workflows}
-
-install software
-reserve machine to exclusive use
-prepare batch jobs for the run
-evaluate and validate the performance
-compare results
-submit results
-
 
 
 
@@ -667,12 +646,16 @@ When designing benchmarks, it is important to think of the results as experiment
 
 In the case of this work, several practices were identified that relate to making HPC benchmark results more FAIR\citep{kirkpatrick2024}. These include ensuring controlled vocabularies are used when describing system information. Where these are not available, it is preferable for the software, such as cloudmesh, to extract information from other sources, such as system configuration, libraries, or registry settings, especially over the use of free form text. Ideally globally, unique identifiers would be assigned to each benchmark output. Other implementations of FAIR can include writing provenance information about how the benchmark was created into the results file. The FAIR Principles in this work are also exemplified in structured abstraction, e.g., use of YAML, the use of standardization, e.g., NIST standards, and (machine) accessibility via an API. 
 
-result templates
+From the efforts surrounding cloudmesh and SmartSim we have learned we must support as part of the benchmark carpentry as defined in \citep{??earthquake} also tasks related to 
+
+(a) installing software, (b) reserving compute resources for exclusive use, (c) prepare experiments (potentially using large number of batch jobs) and execute them, (d) evaluate and validate the resulting performance including computational powre of CPUs, GPUs, data I/O, networking, and energy, (e) recorde the results in a uniform format so that comparisions can be made (f) and submit results to the community to allow others to contribute, either through publications or efforts such as promoted by MLCommons.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Experiment Execution Templates}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experiment Execution on High Performance Computers}
@@ -698,7 +681,7 @@ The elasticity of resources leads to experiment execution paradigms that are dri
 \subsection{Federated Experiment Execution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-From Grids back to client-side control
+Federated computing is a larger scale of computing that takes advantage of resources across multiple HPC platforms. This might either to perform computations that are larger than the resources available on a single HPC platform and/or to support application with heterogenous hardware requirements (e.g. a part of the application may be performant on GPU whereas another part might be better suited for many-core CPUs). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experiment Execution on Clouds}
@@ -762,6 +745,8 @@ Combining these entities and methods allows users to create workflows that canno
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Evaluation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{vonLaszewski-frontiers-table-compare}
 
 \subsection{Experiment Executor Features}
 
@@ -945,24 +930,43 @@ We have practical experience from multiple teams where coders spent multiple mon
 
 \subsection{SmartSim}
 
-SmartSim in contrast to Cloudmesh follows a paradigm where the user describes the parameterization of a workflow and its components within a single python-based driver file. The top-level ``Experiment'' object contains a variety of factory methods used to create representatives of workflow components as well as other methods used to launch and monitor tasks. These factory methods and other methods on the objects themselves have ways of modifying the behavior of the application using the following three mechanisms
+SmartSim in contrast to Cloudmesh follows a paradigm where the user describes the parameterization of a workflow and its components within a single python-based driver file.
+
+
+The top-level ``Experiment'' object contains a variety of factory methods used to create representatives of workflow components as well as other methods used to launch and monitor tasks. These factory methods and other methods on the objects themselves have ways of modifying the behavior of the application using the following three mechanisms
 \begin{enumerate}
     \item Specifying parameter values in templated input files
     \item Defining different collections of input files
     \item Modifying runtime arguments passed to the executable
 \end{enumerate}
-When creating an Ensemble, the user can specify a number of strategies to explore a parameter space. The most granular strategy has the user manually add individually configured ``Model'' objects to the Ensemble object. SmartSim also provides a number of more automatic strategies to create the Ensemble. The first ``replicas'' uses the same set of parameters for $N$ ensemble members, useful for exploring applications which have inherent internal stochasticity. The ``step'' strategy specifies $N$ sets of parameter key value pairs creating $N$ ensemble models. The ``all_perm'' strategy calculates all permutations of the input parameter key value pairs. While SmartSim does not have the concept of a configuration file as a native concept, users have employed JSON, YAML, and the Hydra framework \cite{Hadan2019Hydra} to translate file-specified parameters to the SmartSim factory methods.
+When creating an Ensemble, the user can specify a number of strategies to explore a parameter space. The most granular strategy has the user manually add individually configured ``Model'' objects to the Ensemble object. SmartSim also provides a number of more automatic strategies to create the Ensemble. The first ``replicas'' uses the same set of parameters for $N$ ensemble members, useful for exploring applications which have inherent internal stochasticity. The ``step'' strategy specifies $N$ sets of parameter key value pairs creating $N$ ensemble models. The ``all\_perm'' strategy calculates all permutations of the input parameter key value pairs. While SmartSim does not have the concept of a configuration file as a native concept, users have employed JSON, YAML, and the Hydra framework \cite{Hadan2019Hydra} to translate file-specified parameters to the SmartSim factory methods.
 
-The run directories for the object are created during a `generation' step. The resulting directory can then be inspected by the user or otherwise modified. The Experiment's ``start'' method interacts with the workload manager on the platform to actually execute that component of the workflow and allow SmartSim to monitor its status. Based on the user-specified workload manager, SmartSim will construct the appropriate run command (e.g. SLURM's srun) and/or batch file and command (e.g. PBS's qsub) and submit to the workload manager. The standard error and standard out for each wokrflow component are captured and stored as text files within each component's run directory.
+Listing \ref{lstlisting:smartsim-ensemble} demonstrates the configuration, generation, and launching of a 4-member ensemble parameterized by two variables ``foo'' and ``bar'' each with two parameter values each. 
+\begin{lstlisting}[language=python]\label{lstlisting:smartsim-ensemble}
+    from smartsim import Experiment
+
+    exp = Experiment("example-ensemble-experiment", launcher="slurm")
+    rs = exp.create_run_settings(exe="path/to/example_simulation_program")
+    params = {
+                "foo": [2, 11],
+                "bar": [1.0, 1.5]
+             }
+    ensemble = exp.create_ensemble("example-ensemble", 
+                                   run_settings=rs, 
+                                   params=params, 
+                                   perm_strategy="all_perm")
+    ensemble.attach_generator_files(to_configure=["/path/to/templated/config/file"])
+    exp.generate(ensemble)
+    exp.start(ensemble)
+\end{lstlisting}
+
+The run directories for the object are created during the ``generate'' step. The resulting directory can then be inspected by the user or otherwise modified. The Experiment's ``start'' method interacts with the workload manager on the platform to actually execute that component of the workflow and allow SmartSim to monitor its status. Based on the user-specified workload manager, SmartSim will construct the appropriate run command (e.g. SLURM's srun) and/or batch file and command (e.g. PBS's qsub) and submit to the workload manager. The standard error and standard out for each wokrflow component are captured and stored as text files within each component's run directory.
 
 The dynamic configuration and execution of these workflow components allows SmartSim users to create workflows where the values of parameters are not known a priori. This is particularly important for workflows that are iterative in nature (see Section \ref{subsubsection:cyclic} for further detail).
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Applications}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{OSMI}
@@ -991,6 +995,7 @@ PyTorch    & RedisAI     & SmartRedis      & RESP  \\ \hline
 \caption{OSMI-supported AI frameworks.}
 \label{tab:osmi}
 \end{table}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Cyclic Execution} \label{subsubsection:cyclic}
