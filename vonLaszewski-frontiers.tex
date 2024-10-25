@@ -910,23 +910,7 @@ Obviously, the system can also be used on a uniform HPC infrastructure but the u
 \subsubsection{Compute Coordinator a Cloudmesh Plugin}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Hybrid Reusable Computational Analytics Workflow
-Management with Cloudmesh
-
-\citep{las-2022-hybrid}
-\citep{las-2022-templated}
-
-
-The workflow specification plays an important role in not only
-defining a workflow but also in simplifying status updates that are
-updating an instantiation of a workflow. As we have completely
-separated the status of the workflow from obtaining status updates,
-the system allows it to be shut down while the underlying jobs as part
-of the system integration can still be executed. Once the system is
-started again it self synchronizes its status from the system
-integration services. To summarize, the client is stateless and
-fetches the state of the submitted jobs on demand. It will return the
-latest state found on the job execution services.
+The role of the compute coordinator is to execute tasks on compute resources. tasks can be scheduled on a variety of schedulers operating on compute resources. examples are LSF, SLURm, and SSH.
 
 The workflows are defined with human-readable YAML and can be stored
 in various formats on databases such as Cloudmesh YamlDB [7], which is
@@ -956,6 +940,19 @@ the workflow allows the specification of dependencies between tasks.
 The framework is managed through a number of opensource repositories
 in GitHub [8], [8] and uses Python as the implementation language. The
 code is compatible with Windows, macOS, and Linux.
+
+
+Hybrid Reusable Computational Analytics Workflow
+Management with Cloudmesh
+
+
+
+\citep{las-2022-hybrid}
+\citep{las-2022-templated}
+
+
+The workflow specification plays an important role in not only defining a workflow but also in simplifying status updates that are updating an instantiation of a workflow. As we have completely separated the status of the workflow from obtaining status updates, the system allows it to be shut down while the underlying jobs as part of the system integration can still be executed. Once the system is started again it self synchronizes its status from the system integration services. To summarize, the client is stateless and fetches the state of the submitted jobs on demand. It will return the latest state found on the job execution services.
+
 
 The workflow definition for Cloudmesh is rather simple and
 intuitive. An example is provided in Figure 2 that specifies a task
