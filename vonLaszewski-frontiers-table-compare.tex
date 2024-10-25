@@ -1,4 +1,7 @@
 \begin{table}[htbp]
+\caption{Collective features for experiment workflows.}
+\label{tab:features}
+\label
 \centering
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{|l|l|l|}
@@ -12,25 +15,26 @@ Batch Submission & \YES & \YES \\
 Within Allocation & \YES & \YES \\
 DAGs  & \YES  & \YES \\
 Inferencing Capabilities & \NO & \YES \\
-Ensemble execution & \YES & \YES \\
+Experiment/Ensemble & \YES & \YES \\
 \hline
 \multicolumn{3}{|l|}{\bf\em Interface}\\
 \hline
 Python API & \YES & \YES \\
 Command line & \YES & \NO \\
 Command shell & \YES & \NO \\
-GUI  & (\YES) & \NO \\
+GUI  & (\YES) & \YES \\
 \hline
 \multicolumn{3}{|l|}{\bf\em Parameters}\\
 \hline
 YAML & \YES & \YES  \\
 multi-value YAML & \YES & \NO \\
+evaluative YAML ($f(\vec{x}$)) & \YES & \NO \\
 Gridsearch & \YES & \YES \\
 Customizable & \YES & \YES \\
 \hline
 \multicolumn{3}{|l|}{\bf\em Federation}\\
 \hline
-SSH & \YES & \YES \\
+SSH & \YES & \NO \\
 Split VPN support & \YES & \NO \\
 Build in parallel multi resource experiments & \YES & \NO \\
 Combine results by multiple users & \YES & \NO \\
@@ -56,5 +60,4 @@ AWS Kubernetes  & in progress & \NO \\
 \hline
 \end{tabular}
 }
-\caption{Resizable Table with Rotated Column Headers}
 \end{table}
