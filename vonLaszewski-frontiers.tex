@@ -910,72 +910,69 @@ Obviously, the system can also be used on a uniform HPC infrastructure but the u
 \subsubsection{Compute Coordinator a Cloudmesh Plugin}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\citep{las-2022-hybrid}
-\citep{las-2022-templated}
-
 Hybrid Reusable Computational Analytics Workflow
 Management with Cloudmesh
 
-The workflow specification plays an important role in not
-only defining a workflow but also in simplifying status updates
-that are updating an instantiation of a workflow. As we have
-completely separated the status of the workflow from obtaining
-status updates, the system allows it to be shut down while the
-underlying jobs as part of the system integration can still be
-executed. Once the system is started again it self synchronizes
-its status from the system integration services. To summarize,
-the client is stateless and fetches the state of the submitted
-jobs on demand. It will return the latest state found on the job
-execution services.
+\citep{las-2022-hybrid}
+\citep{las-2022-templated}
 
-The workflows are defined with human-readable YAML
-and can be stored in various formats on databases such as
-Cloudmesh YamlDB [7], which is file-based and provides
-the easiest integration. Hence, it is easy to create a variety
-of monitoring components (for example, as part of a Web
-browser) to display the Workflow and its status as a graph,
-table, or even as a continuous log file.
-One of the most important parts of the framework is how
-we manage jobs and monitor their status through a status
-specification. For this, we have introduced an abstract job
+
+The workflow specification plays an important role in not only
+defining a workflow but also in simplifying status updates that are
+updating an instantiation of a workflow. As we have completely
+separated the status of the workflow from obtaining status updates,
+the system allows it to be shut down while the underlying jobs as part
+of the system integration can still be executed. Once the system is
+started again it self synchronizes its status from the system
+integration services. To summarize, the client is stateless and
+fetches the state of the submitted jobs on demand. It will return the
+latest state found on the job execution services.
+
+The workflows are defined with human-readable YAML and can be stored
+in various formats on databases such as Cloudmesh YamlDB [7], which is
+file-based and provides the easiest integration. Hence, it is easy to
+create a variety of monitoring components (for example, as part of a
+Web browser) to display the Workflow and its status as a graph, table,
+or even as a continuous log file.  One of the most important parts of
+the framework is how we manage jobs and monitor their status through a
+status specification. For this, we have introduced an abstract job
 class that is integrated into a workflow class. The job class can
 define jobs, start them, and cancel them, to name only the most
-important management methods. However, each job defines a
-status file in which the actual progress of the job is recorded.
-This status file is managed on the compute resource where the
-job is run and is queried on demand to return the status to the
-client. This way, the status of all jobs can be monitored. As our
-goal is not to run jobs that execute in milliseconds but rather
-in the second range, such status reporting and propagation
-is well-suited for us as our tasks are typically long-running.
-Our status progress update specification is universally applicable fia integration into notifications through files (including
-stdout and stderr) and thus can be issued by bash scripts,
-SLURM scripts, Python programs, Jupyter notebooks, or any
-other computing language. The workflow status updates are
-implicitly augmented with timestamps, the compute resource,
-where it is resulting from, and additional messages to be sent
-to the monitoring component. Obviously, the workflow allows
-the specification of dependencies between tasks.
-The framework is managed through a number of opensource repositories in GitHub [8], [8] and uses Python as
-the implementation language. The code is compatible with
-Windows, macOS, and Linux.
+important management methods. However, each job defines a status file
+in which the actual progress of the job is recorded.  This status file
+is managed on the compute resource where the job is run and is queried
+on demand to return the status to the client. This way, the status of
+all jobs can be monitored. As our goal is not to run jobs that execute
+in milliseconds but rather in the second range, such status reporting
+and propagation is well-suited for us as our tasks are typically
+long-running.  Our status progress update specification is universally
+applicable fia integration into notifications through files (including
+stdout and stderr) and thus can be issued by bash scripts, SLURM
+scripts, Python programs, Jupyter notebooks, or any other computing
+language. The workflow status updates are implicitly augmented with
+timestamps, the compute resource, where it is resulting from, and
+additional messages to be sent to the monitoring component. Obviously,
+the workflow allows the specification of dependencies between tasks.
+The framework is managed through a number of opensource repositories
+in GitHub [8], [8] and uses Python as the implementation language. The
+code is compatible with Windows, macOS, and Linux.
 
-The workflow definition for Cloudmesh is rather simple
-and intuitive. An example is provided in Figure 2 that
-specifies a task graph with the tasks (start → fetch −
-data → compute → analyze → end) representing a
-typical minimalistic use case for Deep Learning (DL). In
-this example the workflow executes three scripts ([fetchdata,compute,analyze].sh). Dependencies can easily be specified in human-readable format while using the node name. The
-nodes contain easy-to-manage information such as the name of
-the node, a label that is used to print the node’s progress, and
-can contain templated variables such as any value defined as
-part of a particular node, or specially formatted time stamps.
-To demonstrate the easy use our label contains the name and
-progress of the workflow which is rendered by the graph
-or table monitoring components. One can also use variables
-accessible from Python including operating system or batch
-system variables to name only a few. Selected examples of
-values usable in the nodes are listed in Tables I and II
+The workflow definition for Cloudmesh is rather simple and
+intuitive. An example is provided in Figure 2 that specifies a task
+graph with the tasks (start $->$ fetch − data $->$ compute $->$ analyze $->$ end)
+representing a typical minimalistic use case for Deep Learning
+(DL). In this example the workflow executes three scripts
+([fetchdata,compute,analyze].sh). Dependencies can easily be specified
+in human-readable format while using the node name. The nodes contain
+easy-to-manage information such as the name of the node, a label that
+is used to print the node’s progress, and can contain templated
+variables such as any value defined as part of a particular node, or
+specially formatted time stamps.  To demonstrate the easy use our
+label contains the name and progress of the workflow which is rendered
+by the graph or table monitoring components. One can also use
+variables accessible from Python including operating system or batch
+system variables to name only a few. Selected examples of values
+usable in the nodes are listed in Tables I and II
 
 
 
