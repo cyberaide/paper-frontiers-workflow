@@ -1,4 +1,4 @@
-FILENAME=vonLaszewski-frontiers
+FILENAME=vonLaszewski-frontiers-workflow
 DIR=paper-frontier
 
 # .PHONY: $(FILENAME).pdf
